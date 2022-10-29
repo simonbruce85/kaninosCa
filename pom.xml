@@ -14,7 +14,7 @@
 	<name>kaninosCa</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>17</java.version>
+		<java.version>18</java.version>
 		<app.image.name>kaninosca</app.image.name>
 		<app.image.tag/>
 	</properties>
