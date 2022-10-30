@@ -45,7 +45,7 @@ const App = () => {
         minHeight: "100vh",
       }}
     >
-       {/*Sidebar for computer ends */}
+       {/*Sidebar for computer ends  */}
       <Sider
         collapsible
         collapsed={collapsed}
