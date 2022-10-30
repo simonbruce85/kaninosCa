@@ -100,7 +100,7 @@ const fetchOwnerIdAndPets = () =>{
     console.log(`selected ${value}`);
   };
   const onSearchOwnerDropDown = (e) => {
-    //check if something has been typed on the owner field to avoid undefined
+    //check if something has been typed on the owner field to avoid undefined.
     if (e)
     setSearch(e.target.value);
   };
