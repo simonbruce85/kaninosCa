@@ -16,7 +16,7 @@ public class PetController {
     private final OwnerService ownerService;
 
     @GetMapping
-    public List<Pet> getAllPets() {return petService.getAllPets();}
+    public List<Pet> getAllPets() { return petService.getAllPets(); }
 
 
     @GetMapping(path = "/dogCount")

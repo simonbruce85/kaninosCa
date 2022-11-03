@@ -1,7 +1,7 @@
 import {Popconfirm, Table, Radio, Badge, Button} from 'antd';
 import React, { useEffect, useState } from 'react';
 import { deleteEntry, getAllRows} from '../client';
-import {successNotification} from "../Notification";
+import {errorNotification, successNotification} from "../Notification";
 import {
     PlusOutlined
 } from '@ant-design/icons';
@@ -72,7 +72,16 @@ const Owners = () => {
             .then(res => res.json())
             .then(data => {
                 setOwners(data);
-            })
+            }).catch((err) => {
+                console.log(err.response);
+                err.response.json().then((res) => {
+                  console.log(res);
+                  errorNotification(
+                    "There was and issue",
+                    `${res.message} [statusCode:${res.status}] [${res.error}]`
+                  );
+                });
+              })
 
     useEffect(() => {
         fetchOwners();

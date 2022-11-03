@@ -49,6 +49,7 @@ function AddNewDogForm({ showDrawer, setShowDrawer, fetchPets }) {
   const [submitting, setSubmitting] = useState(false);
   const [ownerList, setOwnerList] = useState([])
   const [search, setSearch] = useState("")
+  const [form] = Form.useForm();//used to reset the form values after submitting
 
   //fetching all owners Id and Name to show on dropdown menu
 const fetchOwnerIdAndPets = () =>{
@@ -74,18 +75,28 @@ const fetchOwnerIdAndPets = () =>{
           "Pet successfully added",
           `${pet.name} was added to the system`
         );
+        fetchPets();
       })
       .catch((err) => {
-        console.log(err);
+        console.log(err.response);
+        err.response.json().then((res) => {
+          console.log(res);
+          errorNotification(
+            "There was and issue",
+            `${res.message} [statusCode:${res.status}] [${res.error}]`,
+            "bottomLeft"
+          );
+        });
       })
       .finally(() => {
         setSubmitting(false);
-        window.location.reload(false);
+        // window.location.reload(false); used to refresh the page
+        form.resetFields();//used to reset the form values after submitting
       });
   };
 
   const onFinishFailed = (errorInfo) => {
-    alert(JSON.stringify(errorInfo, null, 2));
+    // alert(JSON.stringify(errorInfo, null, 2));
   };
 
   const onChangeDate = (date, dateString) => {
@@ -134,6 +145,7 @@ const fetchOwnerIdAndPets = () =>{
         onFinishFailed={onFinishFailed}
         onFinish={onFinish}
         hideRequiredMark
+        form={form}//used to reset the form values after submitting
       >
         <Row gutter={16}>
           <Col span={12}>

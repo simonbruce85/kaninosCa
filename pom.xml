@@ -14,7 +14,7 @@
 	<name>kaninosCa</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>18</java.version>
+		<java.version>17</java.version>
 		<app.image.name>kaninosca</app.image.name>
 		<app.image.tag/>
 	</properties>
@@ -238,12 +238,12 @@
 								</configuration>
 							</execution>
 							<execution>
-								<id>npm ci</id>
+								<id>npm install</id>
 								<goals>
 									<goal>npm</goal>
 								</goals>
 								<configuration>
-									<arguments>ci</arguments>
+									<arguments>install</arguments>
 								</configuration>
 							</execution>
 							<execution>

@@ -41,6 +41,7 @@ const DogDetails = (state) => {
   const [pet, setPet] = useState("")
   const [searchParams] = useSearchParams();
   const petId = searchParams.get("petId") //getting the value from the query param from URL
+  
 
   const fetchPet = (petId) =>
         getEntry("pets", petId)
