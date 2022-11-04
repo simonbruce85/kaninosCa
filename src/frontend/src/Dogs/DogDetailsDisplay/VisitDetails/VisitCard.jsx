@@ -17,7 +17,7 @@ visitReason,
 
   return (
     <Descriptions bordered className='w-full my-4' column={1}>
-    <Descriptions.Item label="Doctor"></Descriptions.Item>
+    <Descriptions.Item label="Doctor" labelStyle={{width:"100px"}}></Descriptions.Item>
     <Descriptions.Item label="Date" >{date}</Descriptions.Item>
     <Descriptions.Item label="Reason for the Visit" >{visitReason}</Descriptions.Item>
     <Descriptions.Item label="Symptoms">{symptoms}</Descriptions.Item>
@@ -30,9 +30,6 @@ visitReason,
     </Descriptions.Item>
     <Descriptions.Item label="Vaccines" >
     {vaccines}
-    </Descriptions.Item>
-    <Descriptions.Item label="Status" >
-      <Badge status="processing" text="Running" />
     </Descriptions.Item>
   </Descriptions>
   )

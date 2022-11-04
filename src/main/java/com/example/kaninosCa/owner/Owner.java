@@ -2,16 +2,18 @@ package com.example.kaninosCa.owner;
 
 import com.example.kaninosCa.pet.Pet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.sun.istack.NotNull;
+import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
 
 @Entity
+@ToString
+@EqualsAndHashCode
 @Setter
 @Getter
 @Table
@@ -31,8 +33,14 @@ public class Owner {
     @Column(
             name = "id"
     )private Long id;
+    @NotBlank
+    @Column(nullable = false)
     private String name;
+    @NotBlank
+    @Column(nullable = false)
     private String address;
+    @NotNull
+    @Column(nullable = false)
     private String phone;
     private String notes;
 
@@ -54,7 +62,6 @@ public class Owner {
     }
 
     public void addPet(Pet pet) {
-            pet.setOwner(this);
         if (!this.pets.contains(pet)) {
             this.pets.add(pet);
         }
@@ -63,7 +70,6 @@ public class Owner {
     public void removePet(Pet pet) {
         if (this.pets.contains(pet)) {
             this.pets.remove(pet);
-            pet.setOwner(null);
         }
     }
 

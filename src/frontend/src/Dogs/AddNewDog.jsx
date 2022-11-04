@@ -1,5 +1,5 @@
 // StudentDrawerForm.js
-
+import {isMobile} from 'react-device-detect';
 import {
   Drawer,
   Input,
@@ -10,7 +10,6 @@ import {
   Button,
   Spin,
   DatePicker,
-  Cascader,
 } from "antd";
 import { addNewEntry } from "../client";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -18,8 +17,6 @@ import { useEffect, useState } from "react";
 import {
   successNotification,
   errorNotification,
-  infoNotification,
-  warningNotification,
 } from "../Notification";
 import {getOwnersIdAndName} from "../client"
 
@@ -27,28 +24,10 @@ const { Option } = Select;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 
-const typeOptions = [
-  {
-    value: "dog",
-    label: "Dog",
-  },
-  {
-    value: "cat",
-    label: "Cat",
-  },
-  {
-    value: "other",
-    label: "Other",
-  },
-];
-
-
-
 function AddNewDogForm({ showDrawer, setShowDrawer, fetchPets }) {
   const onCLose = () => setShowDrawer(false);
   const [submitting, setSubmitting] = useState(false);
   const [ownerList, setOwnerList] = useState([])
-  const [search, setSearch] = useState("")
   const [form] = Form.useForm();//used to reset the form values after submitting
 
   //fetching all owners Id and Name to show on dropdown menu
@@ -76,10 +55,9 @@ const fetchOwnerIdAndPets = () =>{
           `${pet.name} was added to the system`
         );
         fetchPets();
-      })
-      .catch((err) => {
+      }).catch((err) => {
         console.log(err.response);
-        err.response.json().then((res) => {
+        err.res.json().then((res) => {
           console.log(res);
           errorNotification(
             "There was and issue",
@@ -97,37 +75,39 @@ const fetchOwnerIdAndPets = () =>{
 
   const onFinishFailed = (errorInfo) => {
     // alert(JSON.stringify(errorInfo, null, 2));
+    errorNotification(
+      "There was and issue",
+      'Please fill all the required fields',
+      "bottomLeft"
+    );
   };
 
   const onChangeDate = (date, dateString) => {
     console.log(date, dateString);
   };
 
-  const onChangeType = (value) => {
-    console.log(value);
-  };
+  // const onChangeType = (value) => {
+  //   console.log(value);
+  // };
 
-  const onChangeOwnerDropdown = (value) => {
-    console.log(`selected ${value}`);
-  };
-  const onSearchOwnerDropDown = (e) => {
-    //check if something has been typed on the owner field to avoid undefined.
-    if (e)
-    setSearch(e.target.value);
-  };
-
-  //data filtered folliwing onSearchOwnerDropDown function
-  const filteredOwners = ownerList?.filter((dog) =>
-    dog[1].toLowerCase().includes(search.toLowerCase())
-  );
+  // const onChangeOwnerDropdown = (value) => {
+  //   console.log(`selected ${value}`);
+  // };
+  // const onSearchOwnerDropDown = (e) => {
+  //   //check if something has been typed on the owner field to avoid undefined.
+  //   if (e)
+  //   setSearch(e.target.value);
+  // };
 
   return (
     <Drawer
       title="Add new pet"
-      width={720}
       onClose={onCLose}
+      width={isMobile?300:720}
       visible={showDrawer}
-      bodyStyle={{ paddingBottom: 80 }}
+      bodyStyle={{ 
+        paddingBottom: 80
+      }}
       footer={
         <div
           style={{
@@ -147,17 +127,109 @@ const fetchOwnerIdAndPets = () =>{
         hideRequiredMark
         form={form}//used to reset the form values after submitting
       >
-        <Row gutter={16}>
+        {isMobile?<>
+            <Form.Item name="ownerIndicator" label="Owner" rules={[{ required: true }]}>
+              <Select
+                showSearch
+                placeholder="Select a person"
+                optionFilterProp="children"
+                // onChange={onChangeOwnerDropdown}
+                // onSearch={onSearchOwnerDropDown}
+              >
+                {ownerList?.map((owner)=>(
+                    <Option key={owner[0]} value={owner[0]}>{owner[1]}</Option>
+                ))}
+              </Select>
+            </Form.Item>
+            <Form.Item
+              name="name"
+              label="Name"
+              rules={[{ required: true, message: "Please enter pet name" }]}
+            >
+              <Input placeholder="Please enter pet name" />
+            </Form.Item>
+            <Form.Item
+              name="type"
+              label="Type"
+              rules={[{ required: true, message: "Please enter pet type" }]}
+            >
+              <Select
+                placeholder="Select a person"
+              >
+                <Option value="dog">Dog</Option>
+                <Option value="cat">Cat</Option>
+                <Option value="other">Other</Option>
+              </Select>
+              </Form.Item>
+            <Form.Item
+              name="breed"
+              label="Breed"
+              rules={[{ required: true, message: "Please enter pet breed" }]}
+            >
+              <Input placeholder="Please enter pet breed" />
+            </Form.Item>
+            <Form.Item
+              name="color"
+              label="Color"
+              rules={[{ required: true, message: "Please enter pet color" }]}
+            >
+              <Input placeholder="Please enter pet color" />
+            </Form.Item>
+            <Form.Item
+              name="gender"
+              label="Gender"
+              rules={[{ required: true, message: "Please enter pet gender" }]}
+            >
+              <Input placeholder="Please enter pet gender" />
+            </Form.Item>
+            <Form.Item
+              name="weight"
+              label="Weight"
+              rules={[{ required: true, message: "Please enter pet weight" }]}
+            >
+              <Input placeholder="Please enter pet weight" />
+            </Form.Item>
+            <Form.Item
+              name="dob"
+              label="Date of Birth"
+              rules={[{ required: true, message: "Please enter pet weight" }]}
+            >
+              <DatePicker onChange={onChangeDate} />
+            </Form.Item>
+            <Form.Item
+              name="vaccines"
+              label="Vaccines"
+              rules={[{ required: true, message: "Please enter pet vaccines" }]}
+            >
+              <Input placeholder="Please enter pet vaccines" />
+            </Form.Item>
+            <Form.Item
+              name="notes"
+              label="Notes"
+              rules={[{ message: "Please enter pet weight" }]}
+            >
+              <Input.TextArea placeholder="Please enter pet weight" />
+            </Form.Item>
+        <Row>
+          <Col span={12}>
+            <Form.Item>
+              <Button type="default" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Col>
+        </Row>
+        <Row>{submitting && <Spin indicator={antIcon} />}</Row></>:<> <Row gutter={16}>
           <Col span={12}>
             <Form.Item name="ownerIndicator" label="Owner" rules={[{ required: true }]}>
               <Select
                 showSearch
                 placeholder="Select a person"
                 optionFilterProp="children"
-                onChange={onChangeOwnerDropdown}
-                onSearch={onSearchOwnerDropDown}
+                // onChange={onChangeOwnerDropdown}
+                // onSearch={onSearchOwnerDropDown}
               >
-                {filteredOwners?.map((owner)=>(
+                {ownerList?.map((owner)=>(
                     <Option key={owner[0]} value={owner[0]}>{owner[1]}</Option>
                 ))}
               </Select>
@@ -255,7 +327,7 @@ const fetchOwnerIdAndPets = () =>{
               label="Notes"
               rules={[{ message: "Please enter pet weight" }]}
             >
-              <Input placeholder="Please enter pet weight" />
+              <Input.TextArea placeholder="Please enter pet weight" />
             </Form.Item>
           </Col>
         </Row>
@@ -268,7 +340,10 @@ const fetchOwnerIdAndPets = () =>{
             </Form.Item>
           </Col>
         </Row>
-        <Row>{submitting && <Spin indicator={antIcon} />}</Row>
+        <Row>{submitting && <Spin indicator={antIcon} />}</Row></>
+
+      }
+       
       </Form>
     </Drawer>
   );

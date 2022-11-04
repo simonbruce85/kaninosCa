@@ -5,6 +5,7 @@ import com.example.kaninosCa.pet.Pet;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -24,7 +25,7 @@ public class OwnerController {
     public List<Object> findOwnerIdAndName() {return ownerService.getAllOwnersIdAndName();}
 
     @PostMapping
-    public void addOwner(@RequestBody Owner owner){
+    public void addOwner(@Valid @RequestBody Owner owner){
         ownerService.addOwner(owner);
     }
 

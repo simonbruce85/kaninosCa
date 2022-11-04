@@ -65,7 +65,7 @@ const App = () => {
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
         className="hidden md:block"
-        collapsedWidth={1}
+        collapsedWidth={75}
         width={150}
         style={{
           overflow: "auto",
@@ -135,7 +135,7 @@ const App = () => {
               <FaDog className="px-2 w-[32px] " /> Pets
             </li>
             <li
-              className=" flex py-2 items-center bg-green-200"
+              className=" flex py-2 items-center"
               onClick={() => {
                 navigate("/ownerList");
                 handleDrawer();

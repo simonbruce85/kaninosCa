@@ -19,6 +19,7 @@ const OwnerPetList = (owner) => {
 
   return(
   <div className="flex-col w-full">
+    
     {petList?.map((pet) => {
       return <PetDetails pet={pet}/>
     })}
