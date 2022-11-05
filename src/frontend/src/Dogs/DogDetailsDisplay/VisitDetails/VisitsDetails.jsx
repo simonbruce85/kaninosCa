@@ -21,10 +21,10 @@ useEffect(() => {
 }, []);
 
   return (
-     <div className="flex w-full">
+     <div className="flex w-full py-2">
       <div>
         <Descriptions
-          title="Visit Information"
+          title=""
           className="w-full"
           column={1}
         ></Descriptions>

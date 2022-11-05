@@ -1,36 +1,53 @@
+
 import { Avatar, Menu } from "antd";
 import React, { useEffect, useState } from "react";
-import { UserOutlined } from "@ant-design/icons";
 import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
+  CarryOutOutlined,
+  UserOutlined,
+  FileOutlined,
 } from "@ant-design/icons";
 import PetDetails from "./DogDetailsDisplay/PetDetails";
 import VisitsDetails from "./DogDetailsDisplay/VisitDetails/VisitsDetails";
 import OwnerDetails from "./DogDetailsDisplay/PetDisplayOwnerDetails";
 import { getEntry } from "../client";
 import { useSearchParams } from "react-router-dom";
-
-
-
+import {isMobile} from 'react-device-detect';
 
 const items = [
   {
     label: "Pet Details",
     key: 0,
-    icon: <MailOutlined />,
+    icon: <FileOutlined />,
   },
   {
     label: "Owner Details",
     key: 1,
-    icon: <AppstoreOutlined />,
+    icon: <UserOutlined />,
     
   },
   {
     label: "Visits",
     key: 2,
-    icon: <AppstoreOutlined />,
+    icon: <CarryOutOutlined />,
+  },
+];
+
+const itemsMobile = [
+  {
+    label: "Pet",
+    key: 0,
+    icon: <FileOutlined />,
+  },
+  {
+    label: "Owner ",
+    key: 1,
+    icon: <UserOutlined />,
+    
+  },
+  {
+    label: "Visits",
+    key: 2,
+    icon: <CarryOutOutlined />,
   },
 ];
 
@@ -74,22 +91,22 @@ const DogDetails = (state) => {
     
     <div className="w-full min-h-screen ">
       {/* Avatar section */}
-      <div className=" h-1/5 bg-grey-300">
+      <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
           <Avatar size={128} icon={<UserOutlined />} />
           <h1>{}</h1>
         </div>
       </div>
       {/* End avatar section */}
-      <div className="flex justify-center  ">
+      <div className="flex justify-center">
         <Menu
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
-          items={items}
+          items={isMobile?itemsMobile:items}
         />
       </div>
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center p-2 pt-4">
       {PageDisplay()}
       </div>
     </div>

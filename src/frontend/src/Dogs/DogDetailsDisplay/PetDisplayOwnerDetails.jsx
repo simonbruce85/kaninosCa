@@ -22,7 +22,7 @@ useEffect(() => {
 }, []);
 
     return (
-        <Descriptions title="Owner Information" bordered className='w-full' column={1}>
+        <Descriptions title="" bordered className='w-full py-2' column={1}>
         <Descriptions.Item label="Name" labelStyle={{width:"100px"}}>{owner?.name}</Descriptions.Item>
         <Descriptions.Item label="Address" labelStyle={{width:"100px"}}>{owner?.address}</Descriptions.Item>
         <Descriptions.Item label="Phone Number" >{owner?.phone}</Descriptions.Item>

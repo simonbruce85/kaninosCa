@@ -2,7 +2,6 @@ package com.example.kaninosCa.owner;
 
 import com.example.kaninosCa.exception.BadRequestException;
 import com.example.kaninosCa.exception.NotFoundException;
-import com.example.kaninosCa.pet.Pet;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;

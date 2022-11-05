@@ -18,12 +18,12 @@ export const addNewEntry = (type, info) =>
     },
     method: "POST",
     body: JSON.stringify(info),
-  });
+  }).then(checkStatus);
 
 export const deleteEntry = (entry, entryId) =>
   fetch(`api/v1/${entry}/${entryId}`, {
     method: "DELETE",
-  }).then(checkStatus);
+  }).then(checkStatus)
 
   export const getEntry = (entry, entryId) =>
   fetch(`api/v1/${entry}/${entryId}`).then(checkStatus);
