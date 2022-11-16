@@ -3,6 +3,7 @@ package com.example.kaninosCa.pet;
 import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 import lombok.*;
 
 import javax.persistence.*;
@@ -57,7 +58,11 @@ public class Pet {
     private String type;
     private String breed;
     private String color;
-    private String gender;
+
+    @NotNull
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private PetGender gender;
     private String weight;
     private String dob;
     private String vaccines;

@@ -180,7 +180,10 @@ const fetchOwnerIdAndPets = () =>{
               label="Gender"
               rules={[{ required: true, message: "Please enter pet gender" }]}
             >
-              <Input placeholder="Please enter pet gender" />
+              <Select placeholder="Please select a gender">
+                <Option value="MALE">MALE</Option>
+                <Option value="FEMALE">FEMALE</Option>
+              </Select>
             </Form.Item>
             <Form.Item
               name="weight"
@@ -287,7 +290,10 @@ const fetchOwnerIdAndPets = () =>{
               label="Gender"
               rules={[{ required: true, message: "Please enter pet gender" }]}
             >
-              <Input placeholder="Please enter pet gender" />
+              <Select placeholder="Please select a gender">
+                <Option value="MALE">MALE</Option>
+                <Option value="FEMALE">FEMALE</Option>
+              </Select>
             </Form.Item>
           </Col>
         </Row>
