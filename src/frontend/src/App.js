@@ -66,7 +66,7 @@ const App = () => {
         onCollapse={(value) => setCollapsed(value)}
         className="hidden md:block"
         collapsedWidth={75}
-        width={150}
+        width={151}
         style={{
           overflow: "auto",
           height: "100vh",
