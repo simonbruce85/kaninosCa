@@ -3,6 +3,7 @@ package com.example.kaninosCa.owner;
 import com.example.kaninosCa.doctor.Doctor;
 import com.example.kaninosCa.pet.Pet;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,9 @@ public class OwnerController {
 
     @GetMapping
     public List<Owner> getAllOwners() {return ownerService.getAllOwners();}
+
+//    @GetMapping
+//    public List<Owner> getOwnersPagination() {return ownerService.getAllOwners();}
 
     @GetMapping(path="{id}")
     public Owner getOneOwner(@PathVariable("id") Long id){return ownerService.getOwnerById(id);}

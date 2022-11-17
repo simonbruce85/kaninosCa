@@ -3,6 +3,7 @@ package com.example.kaninosCa.owner;
 import com.example.kaninosCa.exception.BadRequestException;
 import com.example.kaninosCa.exception.NotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -14,7 +15,7 @@ public class OwnerService {
 
     private final OwnerRepository ownerRepository;
 
-    public List<Owner> getAllOwners(){return ownerRepository.findAll();}
+    public List<Owner> getAllOwners(){return ownerRepository.findAll(Sort.by("name").ascending());}
 
     public List<Object> getAllOwnersIdAndName(){return ownerRepository.getAllIdsAndNames();}
 

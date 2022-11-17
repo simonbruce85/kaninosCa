@@ -21,7 +21,7 @@ public class PetService {
     private final OwnerRepository ownerRepository;
 
     public List<Pet> getAllPets()
-    {return petRepository.findAll(Sort.by(Sort.Direction.ASC, "id"));}
+    {return petRepository.findAll(Sort.by(Sort.Direction.ASC, "name"));}
 
     @PostMapping
     public void addPet(Pet pet) {
