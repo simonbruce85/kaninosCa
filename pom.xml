@@ -245,9 +245,9 @@
 								</configuration>
 							</execution>
 							<execution>
-								<id>npm install</id>
+								<id>ci install</id>
 								<goals>
-									<goal>npm</goal>
+									<goal>ci</goal>
 								</goals>
 								<configuration>
 									<arguments>install</arguments>
