@@ -65,6 +65,8 @@ const Dashboard = () => {
             </div>
         </div>
         <div>Simon Bruce Puma, testing changes</div>
+          <div>Simon Bruce Puma, testing changes</div>
+          <div>Simon Bruce Puma, testing changes</div>
         </div>
     </div>
   );
