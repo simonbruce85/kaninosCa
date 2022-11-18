@@ -4,7 +4,6 @@ import { UserOutlined } from "@ant-design/icons";
 import {
   AppstoreOutlined,
   MailOutlined,
-  SettingOutlined,
 } from "@ant-design/icons";
 import { getEntry } from "../client";
 import { useSearchParams } from "react-router-dom";
@@ -48,14 +47,14 @@ const OwnerDetails = (state) => {
     }, []);
 
   const PageDisplay = () => {
-    if (displayContent == 0) {
+    if (displayContent === "0") {
       return <OwnerInformation owner={owner}/>;
     }  else {
       return <OwnerPetList owner={owner}/>;
     }
   };
 
-  {/*Set page number after clicking one of the menu items to render the corresponding component */}
+  /*Set page number after clicking one of the menu items to render the corresponding component */
   const onClick = (e) => {
     setCurrent(e.key);
     setDisplayContent(e.key);

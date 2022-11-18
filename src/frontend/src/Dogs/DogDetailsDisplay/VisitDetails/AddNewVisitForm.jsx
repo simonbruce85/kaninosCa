@@ -13,29 +13,15 @@ import {
 } from "antd";
 import { addNewEntry } from "../../../client";
 import { LoadingOutlined } from "@ant-design/icons";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import {
   successNotification,
-  errorNotification,
-  infoNotification,
-  warningNotification,
 } from "../../../Notification";
 import { isMobile } from "react-device-detect";
 
 const { Option } = Select;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
-
-const typeOptions = [
-  {
-    value: "rosa",
-    label: "Rosa",
-  },
-  {
-    value: "maria",
-    label: "Maria",
-  },
-];
 
 function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
   const onCLose = () => setShowDrawer(false);

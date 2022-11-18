@@ -1,24 +1,23 @@
 import "./App.css";
 import {
-  FileOutlined,
   PieChartOutlined,
   UserOutlined,
   CalendarOutlined
 } from "@ant-design/icons";
-import { Breadcrumb, Layout, Menu, Drawer, Button } from "antd";
+import { Breadcrumb, Layout, Menu, Drawer } from "antd";
 import React, { useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import AppoinmentCalendar from "./Calendar/AppoinmentCalendar";
 import Dogs from "./Dogs/Dogs";
 import Dashboard from "./pages/Dashboard";
 import DogDetails from "./Dogs/DogDetails";
-import { FaUsers, FaBars, FaTimes, FaDog } from "react-icons/fa";
+import { FaDog } from "react-icons/fa";
 import Owners from "./Owners/Owners";
 import OwnerDetails from "./Owners/OwnerDetails";
 import Logo from "./assets/logo.png";
 import { Divide as Hamburger } from "hamburger-react";
 
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
   return {
@@ -42,9 +41,7 @@ const App = () => {
   const location = useLocation();
 
   const [open, setOpen] = useState(false);
-  const showDrawer = () => {
-    setOpen(true);
-  };
+
   const onClose = () => {
     setOpen(false);
   };
@@ -92,7 +89,7 @@ const App = () => {
         <div className="">
           <img
             src={Logo}
-            alt="Logo Image"
+            alt="Logo"
             style={{ width: "50px" }}
             className="cursor-pointer"
           />

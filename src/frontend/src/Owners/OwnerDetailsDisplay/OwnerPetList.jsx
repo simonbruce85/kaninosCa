@@ -1,4 +1,3 @@
-import { Badge, Descriptions } from "antd";
 import React, { useEffect, useState } from "react";
 import { getOwnerPetList } from "../../client";
 import PetDetails from "../../Dogs/DogDetailsDisplay/PetDetails";

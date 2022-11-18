@@ -54,7 +54,7 @@ const itemsMobile = [
 const DogDetails = (state) => {
 
   const [current, setCurrent] = useState("0");
-  const [displayContent, setDisplayContent] = useState(0)
+  const [displayContent, setDisplayContent] = useState("0")
   const [pet, setPet] = useState("")
   const [searchParams] = useSearchParams();
   const petId = searchParams.get("petId") //getting the value from the query param from URL
@@ -72,16 +72,16 @@ const DogDetails = (state) => {
     }, []);
 
   const PageDisplay = () => {
-    if (displayContent == 0) {
+    if (displayContent === "0") {
       return <PetDetails pet={pet}/>;
-    } else if (displayContent == 1) {
+    } else if (displayContent === "1") {
       return <OwnerDetails pet={pet}/>
     } else {
       return <VisitsDetails pet={pet}/>;
     }
   };
 
-  {/*Set page number after clicking one of the menu items to render the corresponding component */}
+  /*Set page number after clicking one of the menu items to render the corresponding component */
   const onClick = (e) => {
     setCurrent(e.key);
     setDisplayContent(e.key);

@@ -1,6 +1,6 @@
 import { Popconfirm, Table, Radio, Badge, Button } from "antd";
 import React, { useEffect, useState } from "react";
-import { deleteEntry, getAllPets, getAllRows } from "../client";
+import { deleteEntry, getAllRows } from "../client";
 import { errorNotification, successNotification } from "../Notification";
 import { PlusOutlined } from "@ant-design/icons";
 import AddNewDogForm from "./AddNewDog";

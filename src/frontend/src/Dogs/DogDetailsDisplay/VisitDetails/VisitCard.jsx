@@ -1,4 +1,4 @@
-import { Badge, Descriptions } from 'antd'
+import { Descriptions } from 'antd'
 import React from 'react'
 
 const VisitCard = ({visit}) => {
@@ -7,11 +7,11 @@ atHomeTreatment,
 clinicTreatment,
 date,
 diagnostic,
-doctorId,
-petId,
+// doctorId,
+// petId,
 symptoms,
 vaccines,
-visitId,
+// visitId,
 visitReason,
   } = visit
 
