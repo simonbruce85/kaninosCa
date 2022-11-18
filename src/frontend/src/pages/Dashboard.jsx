@@ -64,7 +64,7 @@ const Dashboard = () => {
                 <p className="text-gray-500 text-sm">Others</p>
             </div>
         </div>
-        
+        <div>Simon Bruce Puma, testing changes</div>
         </div>
     </div>
   );
