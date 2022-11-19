@@ -86,9 +86,9 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
             {/*Mobile Organization of rows */}
             <Row>
               {/*passing the pet id to be stored in the object*/}
-              <Form.Item name="petId">
+              {/* <Form.Item name="petId">
                 <Input hidden="true" name="petId" value={petId} />
-              </Form.Item>
+              </Form.Item> */}
               <Form.Item
                 name="doctor"
                 label="Doctor"

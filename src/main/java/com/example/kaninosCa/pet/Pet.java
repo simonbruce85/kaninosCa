@@ -70,9 +70,9 @@ public class Pet {
 
 
     public void addVisit(Visit visit) {
-        visit.setPet(this);
         if (!this.visits.contains(visit)) {
             this.visits.add(visit);
+            visit.setPet(this);
         }
     }
 

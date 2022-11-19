@@ -1,6 +1,7 @@
 package com.example.kaninosCa.owner;
 
 import com.example.kaninosCa.pet.Pet;
+import com.example.kaninosCa.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
@@ -52,6 +53,7 @@ public class Owner {
     )
     private List<Pet> pets = new ArrayList<>();
 
+
     public Owner(Long id, String name, String address, String phone, String notes, List<Pet> pets) {
         this.id = id;
         this.name = name;
@@ -64,6 +66,7 @@ public class Owner {
     public void addPet(Pet pet) {
         if (!this.pets.contains(pet)) {
             this.pets.add(pet);
+            pet.setOwner(this);
         }
     }
 
@@ -71,6 +74,7 @@ public class Owner {
         if (this.pets.contains(pet)) {
             this.pets.remove(pet);
         }
+        pet.setOwner(null);
     }
 
 

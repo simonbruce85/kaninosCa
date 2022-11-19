@@ -30,7 +30,7 @@ const items = [
 const OwnerDetails = (state) => {
 
   const [current, setCurrent] = useState("0");
-  const [displayContent, setDisplayContent] = useState(0)
+  const [displayContent, setDisplayContent] = useState("0")
   const [owner, setOwner] = useState("")
   const [searchParams] = useSearchParams();
   const ownerId = searchParams.get("ownerId") //getting the value from the query param from URL
@@ -40,17 +40,19 @@ const OwnerDetails = (state) => {
             .then(res => res.json())
             .then(data => {
                 setOwner(data);
+                console.log(data)
             })
 
     useEffect(() => {
         fetchOwner(ownerId);
+        
     }, []);
 
   const PageDisplay = () => {
     if (displayContent === "0") {
       return <OwnerInformation owner={owner}/>;
     }  else {
-      return <OwnerPetList owner={owner}/>;
+      return (owner.pets.length !== 0 ?<OwnerPetList owner={owner}/>:<div>This owner has no pets yet!</div>);//checking if the owner has pets
     }
   };
 
