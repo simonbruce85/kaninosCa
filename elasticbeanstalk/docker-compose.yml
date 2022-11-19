@@ -1,6 +1,6 @@
 services:
   backend:
-    image: "simonbrucedev/kaninosca:18.11.2022.19.40.45"
+    image: "simonbrucedev/kaninosca:19.11.2022.2.44.26"
     ports:
       - "80:8080"
     restart: "always"
