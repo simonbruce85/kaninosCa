@@ -167,8 +167,8 @@ const App = () => {
           <div className="site-layout-background min-h-[360px] mt-[100px] md:mt-[0px]">
             {}
             <Routes>
-              <Route path="/" element={<Dashboard />} />
-              <Route path="/petList" element={<Dogs />} />
+              <Route path="/" element={<Dogs />} />
+              <Route path="/petList" element={<Dashboard />} />
               <Route path="/ownerList" element={<Owners />} />
               <Route path="/calendar" element={<AppoinmentCalendar />} />
               <Route path="/pet" element={<DogDetails />} />
