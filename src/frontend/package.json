@@ -19,7 +19,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI=false && react-scripts build",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -41,7 +41,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:8080",
+  "proxy": "http://kaninoscaenv-env.eba-3cwbfzxq.us-east-2.elasticbeanstalk.com/",
   "devDependencies": {
     "autoprefixer": "^10.4.12",
     "postcss": "^8.4.17",
