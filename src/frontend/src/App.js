@@ -127,7 +127,7 @@ const App = () => {
               mode="inline"
               onClick={handleLogout}
               items={items2}
-              className="mb-4"
+              className="mb-4 "
             ></Menu>
           </div>
         </Sider>
