@@ -49,7 +49,7 @@ public class Pet {
             mappedBy = "pet",
             orphanRemoval = true,
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Visit> visits = new ArrayList<>();
 

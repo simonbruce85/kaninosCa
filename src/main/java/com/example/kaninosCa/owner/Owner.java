@@ -49,7 +49,7 @@ public class Owner {
             mappedBy = "owner",
             orphanRemoval = true,
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Pet> pets = new ArrayList<>();
 
