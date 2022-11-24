@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { FaHandHoldingMedical, FaDog, FaCat, FaEarlybirds, FaUsers, FaHorseHead  } from 'react-icons/fa';
 import { getDogCount } from "../client";
+import { MdLogout } from "react-icons/md";
+import { UserAuth } from "../auth/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
 
     const [dogCount, setDogCount] = useState("")
+    const { user } = UserAuth();
+  const navigate = useNavigate();
 
     const fetchCounts = () =>
         getDogCount()
@@ -20,7 +25,7 @@ const Dashboard = () => {
 
   return (
     <div className="w-full">
-      <div className="h-fit w-full flex-col md:grid md:grid-cols-3 gap-4  p-6">
+      <div className="h-fit w-full flex-col md:grid md:grid-cols-2 lg:grid-cols-3 gap-4 p-6">
         <div className="border bg-purple-300 rounded-lg flex justify-between md:justify-between text-lg my-2 md:my-0 p-8 px-12 items-center">
             <FaHandHoldingMedical className=" text-gray-500 text-5xl" />
             <div className=" flex-col text-right h-full">
