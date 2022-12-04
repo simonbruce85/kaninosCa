@@ -1,4 +1,4 @@
-package com.example.kaninosCa.pet;
+package com.example.kaninosCa.exception;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
