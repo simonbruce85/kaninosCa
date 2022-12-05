@@ -22,6 +22,7 @@ import Protectedroute from "./auth/Protectedroute";
 import RedirectRoute from "./auth/RedirectRoute";
 import { UserAuth } from "./auth/AuthContext";
 import { MdLogout } from "react-icons/md";
+import KaninosLogo from "./assets/logoAnimalss.png";
 
 const { Content, Footer, Sider } = Layout;
 
@@ -55,7 +56,7 @@ const App = () => {
     try {
       await logOut();
       navigate("/");
-    } catch (error) {
+      } catch (error) {
       console.log(error);
     }
   };
@@ -113,7 +114,9 @@ const App = () => {
             bottom: 0,
           }}
         >
-          <div className=" h-[30px] m-2 flex justify-center items-center logo" />
+          <div className=" h-[30px] m-2 my-4 flex justify-center items-center logo">
+          <p className="text-bold text-gray-400 text-2xl">Kaninos</p>
+          </div>
           <div className="h-[90%] flex flex-col justify-between mb-4">
             <Menu
               theme="dark"

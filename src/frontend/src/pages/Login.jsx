@@ -5,7 +5,7 @@ import { UserAuth } from "../auth/AuthContext";
 import { auth } from "../firebase";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Button, Checkbox, Form, Input } from "antd";
-import KaninosLogo from "../assets/kaninoslogo.png";
+import KaninosLogo from "../assets/kaninoslogoBackground.png";
 
 const Login = () => {
   const [email, setEmail] = useState("");
