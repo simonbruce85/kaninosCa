@@ -46,6 +46,7 @@ const fetchOwnerIdAndPets = () =>{
   
   const onFinish = (pet) => {
     setSubmitting(true);
+    console.log("no error agregando");
     console.log(JSON.stringify(pet, null, 2));
     addNewEntry("pets", pet)
       .then(() => {
@@ -58,14 +59,14 @@ const fetchOwnerIdAndPets = () =>{
       }).catch((err) => {
         console.log("error agregando");
         console.log(err.response);
-        // err.response.json().then((res) => {
-        //   console.log(res);
-        //   errorNotification(
-        //     "There was and issue",
-        //     `${res.message} [statusCode:${res.status}] [${res.error}]`,
-        //     "bottomLeft"
-        //   );
-        // });
+        err.response.json().then((res) => {
+          console.log(res);
+          errorNotification(
+            "There was and issue",
+            `${res.message} [statusCode:${res.status}] [${res.error}]`,
+            "bottomLeft"
+          );
+        });
       })
       .finally(() => {
         setSubmitting(false);
@@ -348,9 +349,7 @@ const fetchOwnerIdAndPets = () =>{
           </Col>
         </Row>
         <Row>{submitting && <Spin indicator={antIcon} />}</Row></>
-
       }
-       
       </Form>
     </Drawer>
   );
