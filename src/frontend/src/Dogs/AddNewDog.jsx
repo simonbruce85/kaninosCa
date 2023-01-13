@@ -56,8 +56,9 @@ const fetchOwnerIdAndPets = () =>{
         );
         fetchPets();
       }).catch((err) => {
+        console.log("error agregando");
         console.log(err.response);
-        err.res.json().then((res) => {
+        err.response.json().then((res) => {
           console.log(res);
           errorNotification(
             "There was and issue",

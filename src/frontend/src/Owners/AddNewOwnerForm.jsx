@@ -36,7 +36,7 @@ function AddNewOwnerForm({ showDrawer, setShowDrawer,fetchOwners }) {
   };
 
   const onFinishFailed = (errorInfo) => {
-    // alert(JSON.stringify(errorInfo, null, 2));
+    alert(JSON.stringify(errorInfo, null, 2));
     errorNotification(
       "There was and issue",
       'Please fill all the required fields',
