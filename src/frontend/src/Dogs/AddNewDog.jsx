@@ -58,14 +58,14 @@ const fetchOwnerIdAndPets = () =>{
       }).catch((err) => {
         console.log("error agregando");
         console.log(err.response);
-        err.response.json().then((res) => {
-          console.log(res);
-          errorNotification(
-            "There was and issue",
-            `${res.message} [statusCode:${res.status}] [${res.error}]`,
-            "bottomLeft"
-          );
-        });
+        // err.response.json().then((res) => {
+        //   console.log(res);
+        //   errorNotification(
+        //     "There was and issue",
+        //     `${res.message} [statusCode:${res.status}] [${res.error}]`,
+        //     "bottomLeft"
+        //   );
+        // });
       })
       .finally(() => {
         setSubmitting(false);
