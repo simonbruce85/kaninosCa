@@ -16,11 +16,16 @@ public class PetController {
     private final OwnerService ownerService;
 
     @GetMapping
-    public List<Pet> getAllPets() { return petService.getAllPets(); }
+    public List<Pet> getAllPets() {
+
+        return petService.getAllPets();
+    }
 
 
     @GetMapping(path = "/dogCount")
-    public Long dogCount() {return petService.countDogs();}
+    public Long dogCount() {
+        return petService.countDogs();
+    }
 
 
     @GetMapping(path="{id}")
@@ -31,9 +36,10 @@ public class PetController {
 
     @PostMapping
     public void addPet(@RequestBody Pet pet){
-        Owner owner = ownerService.getOwnerById(pet.getOwnerIndicator());
-        owner.addPet(pet);
-        petService.addPet(pet);
+//        Owner owner = ownerService.getOwnerById(pet.getOwnerIndicator());
+//        owner.addPet(pet);
+//        petService.addPet(pet);
+        throw new IllegalStateException("oops eroor");
     }
 
     @DeleteMapping(path="{id}")
