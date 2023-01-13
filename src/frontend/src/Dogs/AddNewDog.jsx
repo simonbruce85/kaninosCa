@@ -57,6 +57,7 @@ const fetchOwnerIdAndPets = () =>{
         );
         fetchPets();
       }).catch((err) => {
+        console.log(JSON.stringify(pet, null, 2));
         console.log("error agregando");
         console.log(err.response);
         err.response.json().then((res) => {

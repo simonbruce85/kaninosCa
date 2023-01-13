@@ -2,11 +2,12 @@ import fetch from "unfetch";
 
 const checkStatus = (response) => {
   if (response.ok) {
+      console.log("error inside response ok")
     return response;
   }
   const error = new Error(response.statusText);
   error.response = response;
-  console.log("error here")
+  console.log(error)
   return Promise.reject(error);
 };
 
