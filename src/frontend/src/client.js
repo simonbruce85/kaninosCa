@@ -5,9 +5,11 @@ const checkStatus = (response) => {
       console.log("error inside response ok")
     return response;
   }
+  console.log("la respuesta es")
+  console.log(response);
   const error = new Error(response.statusText);
   error.response = response;
-  console.log(error)
+  console.log(error);
   return Promise.reject(error);
 };
 
