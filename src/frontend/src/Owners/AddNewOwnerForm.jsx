@@ -28,11 +28,24 @@ function AddNewOwnerForm({ showDrawer, setShowDrawer,fetchOwners }) {
         successNotification(
           "Owner successfully added",
           `${owner.name} was added to the system`
-        );
-        fetchOwners();
-        setSubmitting(false);
-        form.resetFields();//used to reset the form values after submitting
-      })
+        )
+      }).catch((err) => {
+        console.log(JSON.stringify(owner, null, 2));
+        console.log("error agregando owner");
+        console.log(err.response);
+        err.response.json().then((res) => {
+            errorNotification(
+                "There was and issue",
+                `${res.message} [statusCode:${res.status}] [${res.error}]`,
+                "bottomLeft"
+            );
+        });
+    })
+        .finally(() => {
+            setSubmitting(false);
+            // window.location.reload(false); used to refresh the page
+            form.resetFields();//used to reset the form values after submitting
+        });
   };
 
   const onFinishFailed = (errorInfo) => {
