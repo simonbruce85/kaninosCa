@@ -46,7 +46,6 @@ const fetchOwnerIdAndPets = () =>{
   
   const onAdd = (pet) => {
     setSubmitting(true);
-    console.log("no error agregando");
     console.log(JSON.stringify(pet, null, 2));
     addNewEntry("pets", pet)
       .then(() => {
