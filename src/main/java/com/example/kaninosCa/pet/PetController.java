@@ -39,7 +39,7 @@ public class PetController {
 //        Owner owner = ownerService.getOwnerById(pet.getOwnerIndicator());
 //        owner.addPet(pet);
 //        petService.addPet(pet);
-        throw new IllegalStateException("oops eroor");
+        throw new IllegalStateException("oops eroorr");
     }
 
     @DeleteMapping(path="{id}")
