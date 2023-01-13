@@ -2,7 +2,6 @@ import fetch from "unfetch";
 
 const checkStatus = (response) => {
   if (response.ok) {
-      console.log("error inside response ok")
     return response;
   }
   console.log("la respuesta es")
