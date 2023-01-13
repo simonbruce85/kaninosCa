@@ -89,7 +89,7 @@ const DogDetails = (state) => {
 
   return (
     
-    <div className="w-full min-h-screen ">
+    <div className="w-full min-h-screen">
       {/* Avatar section */}
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
