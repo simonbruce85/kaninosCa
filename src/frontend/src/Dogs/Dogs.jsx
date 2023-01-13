@@ -164,10 +164,10 @@ const Dogs = () => {
         console.log(err.response);
         err.response.json().then((res) => {
           console.log(res);
-          // errorNotification(
-          //   "There was and issue",
-          //   `${res.message} [statusCode:${res.status}] [${res.error}]`
-          // );
+          errorNotification(
+            "There was and issue",
+            `${res.message} [statusCode:${res.status}] [${res.error}]`
+          );
         });
       })
       .finally(() => setLoading(false));

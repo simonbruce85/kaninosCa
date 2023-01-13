@@ -55,7 +55,7 @@ const fetchOwnerIdAndPets = () =>{
           "Pet successfully added",
           `${pet.name} was added to the system`
         );
-        fetchPets();
+        // fetchPets();
       }).catch((err) => {
         console.log(JSON.stringify(pet, null, 2));
         console.log("error agregando");
