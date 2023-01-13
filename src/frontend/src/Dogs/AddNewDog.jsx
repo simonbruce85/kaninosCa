@@ -45,33 +45,7 @@ const fetchOwnerIdAndPets = () =>{
 //fetching all owners Id and Name to show on dropdown menu
   
   const onFinish = (pet) => {
-    setSubmitting(true);
-    console.log("no error agregando");
-    console.log(JSON.stringify(pet, null, 2));
-    addNewEntry("pets", pet)
-      .then(() => {
-        onCLose();
-        successNotification(
-          "Pet successfully added",
-          `${pet.name} was added to the system`
-        );
-        fetchPets();
-      }).catch((err) => {
-        console.log("error agregando");
-        console.log(err.response);
-        err.response.json().then((res) => {
-          errorNotification(
-            "There was and issue",
-            `${res.message} [statusCode:${res.status}] [${res.error}]`,
-            "bottomLeft"
-          );
-        });
-      })
-      .finally(() => {
-        setSubmitting(false);
-        // window.location.reload(false); used to refresh the page
-        form.resetFields();//used to reset the form values after submitting
-      });
+    console.log("asd")
   };
 
   const onFinishFailed = (errorInfo) => {
