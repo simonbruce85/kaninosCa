@@ -14,6 +14,7 @@ const removeDog = (id, callback, petName) => {
       callback();
     })
     .catch((err) => {
+      console.log("error removing")
       err.response.json().then((res) => {
         console.log(res);
         errorNotification(
@@ -159,6 +160,7 @@ const Dogs = () => {
         });
       })
       .catch((err) => {
+        console.log("error fetching")
         console.log(err.response);
         err.response.json().then((res) => {
           console.log(res);

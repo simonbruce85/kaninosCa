@@ -41,6 +41,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
       })
       .catch((err) => {
         console.log(err);
+        console.log("error addinng new visit");
       })
       .finally(() => {
         setSubmitting(false);

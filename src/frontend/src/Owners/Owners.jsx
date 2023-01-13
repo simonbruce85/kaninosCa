@@ -106,6 +106,7 @@ const Owners = () => {
     })
     .catch((err) => {
       console.log(err.response);
+      console.log("error adding owner")
       err.response.json().then((res) => {
         console.log(res);
         errorNotification(
