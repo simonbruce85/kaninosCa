@@ -44,7 +44,7 @@ const fetchOwnerIdAndPets = () =>{
 }, []);
 //fetching all owners Id and Name to show on dropdown menu
   
-  const onFinish = (pet) => {
+  const onAdd = (pet) => {
     setSubmitting(true);
     console.log("no error agregando");
     console.log(JSON.stringify(pet, null, 2));
@@ -55,7 +55,7 @@ const fetchOwnerIdAndPets = () =>{
           "Pet successfully added",
           `${pet.name} was added to the system`
         );
-        // fetchPets();
+        fetchPets();
       }).catch((err) => {
         console.log(JSON.stringify(pet, null, 2));
         console.log("error agregando");
@@ -125,7 +125,7 @@ const fetchOwnerIdAndPets = () =>{
       <Form
         layout="vertical"
         onFinishFailed={onFinishFailed}
-        onFinish={onFinish}
+        onFinish={onAdd}
         hideRequiredMark
         form={form}//used to reset the form values after submitting
       >
