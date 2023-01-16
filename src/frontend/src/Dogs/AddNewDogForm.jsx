@@ -117,7 +117,7 @@ const fetchOwnerIdAndPets = () =>{
         form={form}//used to reset the form values after submitting
       >
         {isMobile?<>
-            <Form.Item name="owner_id" label="Owner" rules={[{ required: true }]}>
+            <Form.Item name="ownerIndicator" label="Owner" rules={[{ required: true }]}>
               <Select
                 showSearch
                 placeholder="Select a person"
