@@ -11,7 +11,7 @@ import {
   Spin,
   DatePicker,
 } from "antd";
-import { addNewEntry } from "../client";
+import { addNewPet } from "../client";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useEffect, useState } from "react";
 import {
@@ -28,6 +28,7 @@ function AddNewDogForm({ showDrawer, setShowDrawer, fetchPets }) {
   const onCLose = () => setShowDrawer(false);
   const [submitting, setSubmitting] = useState(false);
   const [ownerList, setOwnerList] = useState([])
+  const [vaccineList, setVaccineList] = useState([])
   const [form] = Form.useForm();//used to reset the form values after submitting
 
   //fetching all owners Id and Name to show on dropdown menu
@@ -47,7 +48,8 @@ const fetchOwnerIdAndPets = () =>{
   const onAdd = (pet) => {
     setSubmitting(true);
     console.log(JSON.stringify(pet, null, 2));
-    addNewEntry("pets", pet)
+    console.log(pet.ownerIndicator,pet.doctor_id, pet)
+    addNewPet(pet.ownerIndicator,pet.doctor_id, pet)
       .then(() => {
         onCLose();
         successNotification(
@@ -75,7 +77,6 @@ const fetchOwnerIdAndPets = () =>{
   };
 
   const onFinishFailed = (errorInfo) => {
-    // alert(JSON.stringify(errorInfo, null, 2));
     errorNotification(
       "There was and issue",
       'Please fill all the required fields',
@@ -86,19 +87,6 @@ const fetchOwnerIdAndPets = () =>{
   const onChangeDate = (date, dateString) => {
     console.log(date, dateString);
   };
-
-  // const onChangeType = (value) => {
-  //   console.log(value);
-  // };
-
-  // const onChangeOwnerDropdown = (value) => {
-  //   console.log(`selected ${value}`);
-  // };
-  // const onSearchOwnerDropDown = (e) => {
-  //   //check if something has been typed on the owner field to avoid undefined.
-  //   if (e)
-  //   setSearch(e.target.value);
-  // };
 
   return (
     <Drawer
@@ -134,14 +122,24 @@ const fetchOwnerIdAndPets = () =>{
                 showSearch
                 placeholder="Select a person"
                 optionFilterProp="children"
-                // onChange={onChangeOwnerDropdown}
-                // onSearch={onSearchOwnerDropDown}
               >
                 {ownerList?.map((owner)=>(
                     <Option key={owner[0]} value={owner[0]}>{owner[1]}</Option>
                 ))}
               </Select>
             </Form.Item>
+            <Form.Item
+              name="doctor_id"
+              label="Doctor"
+              rules={[{ required: true, message: "Please select Doctor" }]}
+            >
+              <Select
+                placeholder="Select a person"
+              >
+                <Option value={1}>Rosa</Option>
+                <Option value={2}>Maria</Option>
+              </Select>
+              </Form.Item>
             <Form.Item
               name="name"
               label="Name"
@@ -155,7 +153,7 @@ const fetchOwnerIdAndPets = () =>{
               rules={[{ required: true, message: "Please enter pet type" }]}
             >
               <Select
-                placeholder="Select a person"
+                placeholder="Select a type"
               >
                 <Option value="dog">Dog</Option>
                 <Option value="cat">Cat</Option>
@@ -199,13 +197,6 @@ const fetchOwnerIdAndPets = () =>{
               rules={[{ required: true, message: "Please enter pet weight" }]}
             >
               <DatePicker onChange={onChangeDate} />
-            </Form.Item>
-            <Form.Item
-              name="vaccines"
-              label="Vaccines"
-              rules={[{ required: true, message: "Please enter pet vaccines" }]}
-            >
-              <Input placeholder="Please enter pet vaccines" />
             </Form.Item>
             <Form.Item
               name="notes"
@@ -223,21 +214,35 @@ const fetchOwnerIdAndPets = () =>{
             </Form.Item>
           </Col>
         </Row>
-        <Row>{submitting && <Spin indicator={antIcon} />}</Row></>:<> <Row gutter={16}>
+        <Row>{submitting && <Spin indicator={antIcon} />}</Row></>
+        :
+        <> <Row gutter={16}>
           <Col span={12}>
             <Form.Item name="ownerIndicator" label="Owner" rules={[{ required: true }]}>
               <Select
                 showSearch
                 placeholder="Select a person"
                 optionFilterProp="children"
-                // onChange={onChangeOwnerDropdown}
-                // onSearch={onSearchOwnerDropDown}
               >
                 {ownerList?.map((owner)=>(
                     <Option key={owner[0]} value={owner[0]}>{owner[1]}</Option>
                 ))}
               </Select>
             </Form.Item>
+          </Col>
+          <Col span={12}>
+            <Form.Item
+              name="doctor_id"
+              label="Doctor"
+              rules={[{ required: true, message: "Please select Doctor" }]}
+            >
+              <Select
+                placeholder="Select a person"
+              >
+                <Option value={1}>Rosa</Option>
+                <Option value={2}>Maria</Option>
+              </Select>
+              </Form.Item>
           </Col>
           <Col span={12}>
             <Form.Item
@@ -318,13 +323,13 @@ const fetchOwnerIdAndPets = () =>{
             </Form.Item>
           </Col>
           <Col span={12}>
-            <Form.Item
+            {/* <Form.Item
               name="vaccines"
               label="Vaccines"
               rules={[{ required: true, message: "Please enter pet vaccines" }]}
             >
               <Input placeholder="Please enter pet vaccines" />
-            </Form.Item>
+            </Form.Item> */}
           </Col>
         </Row>
         <Row gutter={16}>

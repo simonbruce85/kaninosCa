@@ -13,7 +13,7 @@ public interface PetRepository extends JpaRepository<Pet,Long> {
     Long countPet(String pet);
     //or can be done as  public List<Pet> findByType(String name) and the use .size() in service class as done with otherCount;
 
-    public List<Pet> findPetByOwnerIndicator(Long ownerIndicator);
+    public List<Pet> findPetByOwner(Long ownerId);
 
 
     public List<Pet> findByType(String name);

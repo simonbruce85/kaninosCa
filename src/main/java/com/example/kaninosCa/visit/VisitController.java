@@ -18,9 +18,10 @@ public class VisitController {
     @GetMapping
     public List<Visit> getAllVisits() {return visitService.getAllVisits();}
 
-    @PostMapping
-    public void addVisit(@RequestBody Visit visit){
-        Pet pet = petService.getPetById(visit.getPetId());
+    @PostMapping(path="/pet/{petId}")
+    public void addVisit(@RequestBody Visit visit,
+                         @PathVariable("petId") Long petId){
+        Pet pet = petService.getPetById(petId);
         pet.addVisit(visit);
         visitService.addVisit(visit);
     }
@@ -30,4 +31,7 @@ public class VisitController {
             @PathVariable("visitId") Long visitId){
         visitService.deleteVisit(visitId);
     }
+
+    @GetMapping(path="{id}")
+    public Visit getVisit(@PathVariable("id") Long id){return visitService.getVisitById(id);}
 }

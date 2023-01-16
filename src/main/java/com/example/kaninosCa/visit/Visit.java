@@ -1,14 +1,14 @@
 package com.example.kaninosCa.visit;
 
-import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.pet.Pet;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.example.kaninosCa.vaccine.Vaccine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @ToString
 @Getter
@@ -30,18 +30,17 @@ public class Visit {
             strategy = GenerationType.SEQUENCE
     )
     private Long visitId;
-    private Long petId;
     private Long doctorId;
     private String date;
+    private String doctor;
     private String visitReason;
     private String symptoms;
     private String diagnostic;
     private String clinicTreatment;
     private String atHomeTreatment;
-    private String vaccines;
 
 
-    @JsonIgnore
+    @JsonIgnoreProperties({"visits"})
     @ManyToOne
     @JoinColumn(
             name = "pet_visit",
@@ -52,18 +51,45 @@ public class Visit {
     )
     private Pet pet;
 
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "visitVaccines",
+            joinColumns = @JoinColumn(
+                    name = "visitId",
+                    foreignKey = @ForeignKey(name = "visitVaccine_visit_id_fk")
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "vaccineId",
+                    foreignKey = @ForeignKey(name = "visitVaccine_vaccine_id_fk")
+            )
 
-    public Visit(Long visitId, Long petId, Long doctorId, String date, String visitReason, String symptoms, String diagnostic, String clinicTreatment, String atHomeTreatment, String vaccines, Pet pet) {
+    )
+    private List<Vaccine> vaccines = new ArrayList<>();
+
+    public void addVaccineToVisit(Vaccine vaccine) {
+        vaccines.add(vaccine);
+        vaccine.getVisits().add(this);
+    }
+
+    public void removeVaccineFromVisit(Vaccine vaccine){
+        vaccines.remove(vaccine);
+        vaccine.getVisits().remove(this);
+    }
+
+    public Visit(Long visitId, Long doctorId, String date, String doctor, String visitReason, String symptoms, String diagnostic, String clinicTreatment, String atHomeTreatment, Pet pet, List<Vaccine> vaccines) {
         this.visitId = visitId;
-        this.petId = petId;
         this.doctorId = doctorId;
         this.date = date;
+        this.doctor = doctor;
         this.visitReason = visitReason;
         this.symptoms = symptoms;
         this.diagnostic = diagnostic;
         this.clinicTreatment = clinicTreatment;
         this.atHomeTreatment = atHomeTreatment;
-        this.vaccines = vaccines;
         this.pet = pet;
+        this.vaccines = vaccines;
     }
 }

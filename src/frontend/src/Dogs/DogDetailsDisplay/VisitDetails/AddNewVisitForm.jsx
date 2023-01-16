@@ -11,13 +11,14 @@ import {
   Spin,
   DatePicker,
 } from "antd";
-import { addNewEntry } from "../../../client";
+import { addNewEntry, addNewVisit } from "../../../client";
 import { LoadingOutlined } from "@ant-design/icons";
 import { useState } from "react";
 import {
   successNotification,
 } from "../../../Notification";
 import { isMobile } from "react-device-detect";
+
 
 const { Option } = Select;
 
@@ -26,11 +27,14 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
   const onCLose = () => setShowDrawer(false);
   const [submitting, setSubmitting] = useState(false);
+  
+
 
   const onFinish = (visit) => {
     setSubmitting(true);
+    console.log(`${petId} este es el id`)
     console.log(JSON.stringify(visit, null, 2));
-    addNewEntry("visit", visit)
+    addNewVisit(petId, visit)
       .then(() => {
         onCLose();
         successNotification(
@@ -47,6 +51,8 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
         setSubmitting(false);
       });
   };
+  
+  
 
   const onFinishFailed = (errorInfo) => {
     alert(JSON.stringify(errorInfo, null, 2));
@@ -80,7 +86,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
         onFinishFailed={onFinishFailed}
         onFinish={onFinish}
         hideRequiredMark
-        initialValues={(petId = { petId })} // to send the value of the dog id without being an input
+        // initialValues={(petId = { petId })} // to send the value of the dog id without being an input
       >
         {isMobile ? (
           <>
@@ -111,7 +117,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                 rules={[{ required: true, message: "Please enter visit date" }]}
                 className="w-full"
               >
-                <DatePicker onChange={onChangeDate} />
+                <DatePicker onChange={onChangeDate} format={'DD/MM/YYYY'}/>
               </Form.Item>
               <Form.Item
                 name="visitReason"
@@ -164,22 +170,12 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                 <Input.TextArea placeholder="Please enter at home treatment" />
               </Form.Item>
               <Form.Item
-                name="vaccines"
-                label="Vaccines"
-                rules={[
-                  { required: true, message: "Please enter pet vaccines" },
-                ]}
-                className="w-full"
-              >
-                <Input.TextArea placeholder="Please enter pet vaccines" />
-              </Form.Item>
-              <Form.Item
                 name="notes"
                 label="Notes"
                 rules={[{ message: "Please enter pet vaccines" }]}
                 className="w-full"
               >
-                <Input placeholder="Please enter pet vaccines" />
+                <Input.TextArea placeholder="Please enter pet vaccines" />
               </Form.Item>
               <Form.Item>
                 <Button type="default" htmlType="submit">
@@ -197,7 +193,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
               <Form.Item name="petId">
                 <Input hidden="true" name="petId" value={petId} />
               </Form.Item>
-              <Col span={24}>
+              <Col span={12}>
                 <Form.Item
                   name="doctor"
                   label="Doctor"
@@ -221,12 +217,10 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                     { required: true, message: "Please enter visit date" },
                   ]}
                 >
-                  <DatePicker onChange={onChangeDate} />
+                  <DatePicker onChange={onChangeDate} format={'DD/MM/YYYY'}/>
                 </Form.Item>
               </Col>
             </Row>
-            <Row gutter={16}>
-              <Col span={12}>
                 <Form.Item
                   name="visitReason"
                   label="Reason for the visit"
@@ -237,21 +231,15 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                     },
                   ]}
                 >
-                  <Input placeholder="Please enter reason for the visit" />
+                  <Input.TextArea placeholder="Please enter reason for the visit" />
                 </Form.Item>
-              </Col>
-              <Col span={12}>
                 <Form.Item
                   name="symptoms"
                   label="Symptoms"
                   rules={[{ required: true, message: "Please enter symptoms" }]}
                 >
-                  <Input placeholder="Please enter symptoms" />
+                  <Input.TextArea placeholder="Please enter symptoms" />
                 </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
                 <Form.Item
                   name="diagnostic"
                   label="Diagnostic"
@@ -259,10 +247,8 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                     { required: true, message: "Please enter diagnostic" },
                   ]}
                 >
-                  <Input placeholder="Please enter diagnostic" />
+                  <Input.TextArea placeholder="Please enter diagnostic" />
                 </Form.Item>
-              </Col>
-              <Col span={12}>
                 <Form.Item
                   name="clinicTreatment"
                   label="On-site Treatment"
@@ -275,20 +261,14 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                 >
                   <Input placeholder="Please enter Onsite Treatment" />
                 </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
                 <Form.Item
                   name="atHomeTreatment"
                   label="At Home Treatment"
                   rules={[{ required: true, message: "At Home Treatment" }]}
                 >
-                  <Input placeholder="Please enter at home treatment" />
+                  <Input.TextArea placeholder="Please enter at home treatment" />
                 </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item
+                {/* <Form.Item
                   name="vaccines"
                   label="Vaccines"
                   rules={[
@@ -296,15 +276,13 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                   ]}
                 >
                   <Input placeholder="Please enter pet vaccines" />
-                </Form.Item>
-              </Col>
-            </Row>
+                </Form.Item> */}
             <Form.Item
               name="notes"
               label="Notes"
               rules={[{ message: "Please enter pet vaccines" }]}
             >
-              <Input placeholder="Please enter pet vaccines" />
+              <Input.TextArea placeholder="Please enter visit notes" />
             </Form.Item>
             <Row>
               <Col span={12}>

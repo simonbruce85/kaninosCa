@@ -23,6 +23,32 @@ export const addNewEntry = (type, info) =>
     body: JSON.stringify(info),
   }).then(checkStatus);
 
+  export const addNewPet = (ownerId,doctorId, info) =>
+  fetch(`api/v1/pets/owner/${ownerId}/doctor/${doctorId}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(info),
+  }).then(checkStatus);
+
+  export const addNewVisit = (petId, info) =>
+  fetch(`api/v1/visit/pet/${petId}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify(info),
+  }).then(checkStatus);
+
+  export const addNewVaccineToVisit = (petId,vaccineId, visitId) =>
+  fetch(`api/v1/vaccines/${petId}/${vaccineId}/visit/${visitId}`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "PUT",
+  }).then(checkStatus);
+
 export const deleteEntry = (entry, entryId) =>
   fetch(`api/v1/${entry}/${entryId}`, {
     method: "DELETE",
@@ -31,11 +57,15 @@ export const deleteEntry = (entry, entryId) =>
   export const getEntry = (entry, entryId) =>
   fetch(`api/v1/${entry}/${entryId}`).then(checkStatus);
 
-export const getDogCount = () =>
+  export const getDogCount = () =>
   fetch(`api/v1/dashboard`).then(checkStatus);
 
-export const getOwnersIdAndName = () =>
+  export const getOwnersIdAndName = () =>
   fetch(`api/v1/owners/ownersDropdown`).then(checkStatus);
 
   export const getOwnerPetList = (id) =>
   fetch(`api/v1/pets/allPetsOfOwner/${id}`).then(checkStatus);
+
+  export const getVaccines = () =>
+  fetch(`api/v1/vaccines`).then(checkStatus);
+

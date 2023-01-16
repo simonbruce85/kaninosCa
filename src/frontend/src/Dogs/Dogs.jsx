@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { deleteEntry, getAllRows } from "../client";
 import { errorNotification, successNotification } from "../Notification";
 import { PlusOutlined } from "@ant-design/icons";
-import AddNewDogForm from "./AddNewDog";
+import AddNewDogForm from "./AddNewDogForm";
 import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
 

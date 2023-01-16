@@ -77,7 +77,7 @@ const DogDetails = (state) => {
     } else if (displayContent === "1") {
       return <OwnerDetails pet={pet}/>
     } else {
-      return <VisitsDetails pet={pet}/>;
+      return <VisitsDetails pet={pet} />;
     }
   };
 

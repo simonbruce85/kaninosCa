@@ -30,7 +30,7 @@ public class OwnerController {
 
     @PostMapping
     public void addOwner(@Valid @RequestBody Owner owner){
-        throw new IllegalStateException("oops eroorr");
+        ownerService.addOwner(owner);
     }
 
     @DeleteMapping(path="{id}")

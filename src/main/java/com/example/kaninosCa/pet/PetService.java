@@ -58,5 +58,5 @@ public class PetService {
         return petRepository.count();
     }
 
-    public List<Pet> getAllPetsOfAnOwner(Long ownerIndicator){return petRepository.findPetByOwnerIndicator(ownerIndicator);}
+    public List<Pet> getAllPetsOfAnOwner(Long ownerId){return petRepository.findPetByOwner(ownerId);}
 }

@@ -1,13 +1,24 @@
 package com.example.kaninosCa.pet;
 
+import com.example.kaninosCa.doctor.Doctor;
 import com.example.kaninosCa.owner.Owner;
+import com.example.kaninosCa.vaccine.Vaccine;
 import com.example.kaninosCa.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
+import com.vladmihalcea.hibernate.type.array.ListArrayType;
+import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.*;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+import org.hibernate.mapping.Array;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @ToString
@@ -18,6 +29,12 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table
+@TypeDefs({
+        @TypeDef(
+                name = "list-array",
+                typeClass = ListArrayType.class
+        )
+})
 public class Pet {
 
     @Id
@@ -34,7 +51,8 @@ public class Pet {
     )
     private Long id;
 
-    @JsonIgnore
+
+    @JsonIgnoreProperties({"pets"})//ignoring only the pets property in order to avoid infinite loops
     @ManyToOne
     @JoinColumn(
             name = "owner_id",
@@ -45,6 +63,17 @@ public class Pet {
     )
     private Owner owner;
 
+    @JsonIgnoreProperties({"pets"})//ignoring only the pets property in order to avoid infinite loops
+    @ManyToOne
+    @JoinColumn(
+            name = "doctor_id",
+            referencedColumnName = "id",
+            foreignKey = @ForeignKey(
+                    name = "pet_owner_fk"
+            )
+    )
+    private Doctor doctor;
+
     @OneToMany(
             mappedBy = "pet",
             orphanRemoval = true,
@@ -53,7 +82,14 @@ public class Pet {
     )
     private List<Visit> visits = new ArrayList<>();
 
-    private Long ownerIndicator;
+    @OneToMany(
+            mappedBy = "pet",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private List<Vaccine> vaccines = new ArrayList<>();
+
     private String name;
     private String type;
     private String breed;
@@ -65,14 +101,28 @@ public class Pet {
     private PetGender gender;
     private String weight;
     private String dob;
-    private String vaccines;
     private String notes;
+    private LocalDate lastKc;
+    private LocalDate lastRabia;
+    private LocalDate lastSextuple;
+    private LocalDate lastTriple;
+    private LocalDate lastParv;
+    private LocalDate lastQuint;
+    private LocalDate lastGiardia;
+    private LocalDate lastParvMoquillo;
 
 
     public void addVisit(Visit visit) {
         if (!this.visits.contains(visit)) {
             this.visits.add(visit);
             visit.setPet(this);
+        }
+    }
+
+    public void addVaccine(Vaccine vaccine) {
+        if (!this.vaccines.contains(vaccine)) {
+            this.vaccines.add(vaccine);
+
         }
     }
 
@@ -87,4 +137,23 @@ public class Pet {
         return visits;
     }
 
+    public void setLastVaccine(Long vaccineId) {
+        if (vaccineId == 1){
+            this.lastKc = java.time.LocalDate.now();
+        }else if(vaccineId == 2){
+            this.lastRabia = java.time.LocalDate.now();
+        }else if(vaccineId == 3){
+            this.lastSextuple = java.time.LocalDate.now();
+        }else if(vaccineId == 4){
+            this.lastTriple = java.time.LocalDate.now();
+        }else if(vaccineId == 5){
+            this.lastParv = java.time.LocalDate.now();
+        }else if(vaccineId == 6){
+            this.lastQuint = java.time.LocalDate.now();
+        } else if(vaccineId == 7){
+            this.lastGiardia = java.time.LocalDate.now();
+        }else if(vaccineId == 8){
+            this.lastParvMoquillo = java.time.LocalDate.now();
+        }
+    }
 }

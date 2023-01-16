@@ -2,11 +2,14 @@ package com.example.kaninosCa.doctor;
 
 import com.example.kaninosCa.pet.Pet;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -16,7 +19,8 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table
-@EqualsAndHashCode(exclude = {"pets"})
+@AllArgsConstructor
+@EqualsAndHashCode
 public class Doctor {
 
     @Id
@@ -29,15 +33,32 @@ public class Doctor {
             generator = "doctor_sequence",
             strategy = GenerationType.IDENTITY
     )
-    private Long doctorId;
-
-
+    private Long id;
     private String name;
     private String phone;
 
-    public Doctor(Long doctorId, String name, String phone) {
-        this.doctorId = doctorId;
-        this.name = name;
-        this.phone = phone;
+    @JsonIgnoreProperties({"doctor", "visits"})
+    @OneToMany(
+            mappedBy = "doctor",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Pet> pets = new ArrayList<>();
+
+    public void addPet(Pet pet) {
+        if (!this.pets.contains(pet)) {
+            this.pets.add(pet);
+            pet.setDoctor(this);
+        }
     }
+
+    public void removePet(Pet pet) {
+        if (this.pets.contains(pet)) {
+            this.pets.remove(pet);
+        }
+        pet.setDoctor(null);
+    }
+
+
 }

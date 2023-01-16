@@ -1,8 +1,11 @@
-import { Badge, Button, Descriptions } from "antd";
+import { Badge, Button, Descriptions, Select } from "antd";
 import React, { useEffect, useState } from "react";
 import { getEntry } from "../../../client";
 import AddNewVisitForm from "./AddNewVisitForm";
 import VisitCard from "./VisitCard";
+import {v4 as uuidv4} from 'uuid';
+
+const { Option } = Select;
 
 const VisitsDetails = (pet) => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -13,6 +16,7 @@ const VisitsDetails = (pet) => {
         .then(res => res.json())
         .then(data => {
           setPetVisit(data);
+          console.log(data)
         })
     }
         
@@ -48,7 +52,7 @@ useEffect(() => {
         />
         <div>
           {petVisit.visits?.map((visit) => (
-            <VisitCard key={petVisit.visits.visitId} visitId={petVisit.visits.visitId} visit={visit} />))}
+            <VisitCard key={uuidv4()} visit={visit}/>))}
         </div>
       </div> 
      </div>

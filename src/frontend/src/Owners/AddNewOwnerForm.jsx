@@ -29,6 +29,7 @@ function AddNewOwnerForm({ showDrawer, setShowDrawer,fetchOwners }) {
           "Owner successfully added",
           `${owner.name} was added to the system`
         )
+        fetchOwners();
       }).catch((err) => {
         console.log(JSON.stringify(owner, null, 2));
         console.log("error agregando owner");

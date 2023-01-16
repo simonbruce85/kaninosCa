@@ -10,7 +10,8 @@ retrieve the information of the owner corresponding to that id */
   const [owner, setOwner] = useState([]);
 
   const fetchOwner = () =>{
-    getEntry("owners", pet.pet.ownerIndicator)
+    console.log(pet)
+    getEntry("owners", pet.pet.owner.id)
         .then(res => res.json())
         .then(data => {
           setOwner(data);

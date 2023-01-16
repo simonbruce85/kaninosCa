@@ -1,5 +1,6 @@
 package com.example.kaninosCa.visit;
 
+import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.pet.PetRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +25,9 @@ public class VisitService {
 
     public  void deleteVisit(Long visitId){
         visitRepository.deleteById(visitId);
+    }
+
+    public Visit getVisitById(Long visitId){
+        return visitRepository.findById(visitId).get();
     }
 }

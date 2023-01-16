@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 
 import java.io.IOException;
-
+//definitive solution for error 404
 @Configuration
 public class MvcConfiguration implements WebMvcConfigurer {
     @Override
