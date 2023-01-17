@@ -141,6 +141,16 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                 <Input.TextArea placeholder="Please enter symptoms" />
               </Form.Item>
               <Form.Item
+                  name="complExams"
+                  label="Complementary Exams"
+                  rules={[
+                    { required: true, message: "Please enter complementary exams" },
+                  ]}
+                  className="w-full"
+                >
+                  <Input.TextArea placeholder="Please enter complementary exam" />
+                </Form.Item>
+              <Form.Item
                 name="diagnostic"
                 label="Diagnostic"
                 rules={[{ required: true, message: "Please enter diagnostic" }]}
@@ -241,6 +251,15 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                   <Input.TextArea placeholder="Please enter symptoms" />
                 </Form.Item>
                 <Form.Item
+                  name="complExams"
+                  label="Complementary Exams"
+                  rules={[
+                    { required: true, message: "Please enter complementary exams" },
+                  ]}
+                >
+                  <Input.TextArea placeholder="Please enter complementary exam" />
+                </Form.Item>
+                <Form.Item
                   name="diagnostic"
                   label="Diagnostic"
                   rules={[
@@ -259,7 +278,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                     },
                   ]}
                 >
-                  <Input placeholder="Please enter Onsite Treatment" />
+                  <Input.TextArea placeholder="Please enter Onsite Treatment" />
                 </Form.Item>
                 <Form.Item
                   name="atHomeTreatment"
@@ -268,15 +287,6 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
                 >
                   <Input.TextArea placeholder="Please enter at home treatment" />
                 </Form.Item>
-                {/* <Form.Item
-                  name="vaccines"
-                  label="Vaccines"
-                  rules={[
-                    { required: true, message: "Please enter pet vaccines" },
-                  ]}
-                >
-                  <Input placeholder="Please enter pet vaccines" />
-                </Form.Item> */}
             <Form.Item
               name="notes"
               label="Notes"

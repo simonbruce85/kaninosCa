@@ -53,6 +53,8 @@ public class Vaccine {
     private List<Visit> visits = new ArrayList<>();
 
     private String name;
+
+    @Column(columnDefinition="TEXT")
     private String description;
 
 }

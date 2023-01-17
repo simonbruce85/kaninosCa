@@ -43,6 +43,7 @@ public class Owner {
     @NotNull
     @Column(nullable = false)
     private String phone;
+    @Column(columnDefinition="TEXT")
     private String notes;
 
     @OneToMany(

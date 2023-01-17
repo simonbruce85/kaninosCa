@@ -16,6 +16,8 @@ vaccines,
 visitId,
 visitReason,
 pet,
+notes,
+complExams
   } = visit
   
   const [vaccineList, setVaccineList] = useState([]);
@@ -64,12 +66,16 @@ useEffect(() => {
     <Descriptions.Item label="Date" >{date?.slice(8,10)}/{date?.slice(5,7)}/{date?.slice(0,4)} {"(DD/MM/AAAA)"}</Descriptions.Item>
     <Descriptions.Item label="Reason for the Visit" >{visitReason}</Descriptions.Item>
     <Descriptions.Item label="Symptoms">{symptoms}</Descriptions.Item>
+    <Descriptions.Item label="Complementary Exams">{complExams}</Descriptions.Item>
     <Descriptions.Item label="Diagnostic" >
     {diagnostic}
     </Descriptions.Item>
     <Descriptions.Item label="at Home Treatment" >{atHomeTreatment}</Descriptions.Item>
     <Descriptions.Item label="On Site treatment" >
     {clinicTreatment}
+    </Descriptions.Item>
+    <Descriptions.Item label="Notes" >
+    {notes}
     </Descriptions.Item>
     <Descriptions.Item label="Vaccines" >
       <div className='flex flex-col lg:max-w-[30%]'>

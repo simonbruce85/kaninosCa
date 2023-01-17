@@ -101,6 +101,7 @@ public class Pet {
     private PetGender gender;
     private String weight;
     private String dob;
+    @Column(columnDefinition="TEXT")
     private String notes;
     private LocalDate lastKc;
     private LocalDate lastRabia;

@@ -33,11 +33,21 @@ public class Visit {
     private Long doctorId;
     private String date;
     private String doctor;
+    @Column(columnDefinition="TEXT")
     private String visitReason;
+    @Column(columnDefinition="TEXT")
     private String symptoms;
+    @Column(columnDefinition="TEXT")
+    private String complExams;
+    @Column(columnDefinition="TEXT")
     private String diagnostic;
+    @Column(columnDefinition="TEXT")
     private String clinicTreatment;
+    @Column(columnDefinition="TEXT")
     private String atHomeTreatment;
+
+    @Column(columnDefinition="TEXT")
+    private String notes;
 
 
     @JsonIgnoreProperties({"visits"})
