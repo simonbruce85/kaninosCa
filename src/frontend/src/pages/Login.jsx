@@ -44,8 +44,8 @@ const Login = () => {
           <div className="max-w-[450px] md:h-[600px] mx-auto bg-white text-white">
             <div className="max-w-[320px] mx-auto py-8 flex flex-col justify-center">
               <div className="flex justify-center">
-                <img className=""  src={KaninosLogo}/>
-                </div>
+                <img className="" src={KaninosLogo} />
+              </div>
               <h1 className=" text-black">Log In</h1>
               {error ? <p className="p-3 bg-red-400 my-2">{error}</p> : null}
               <Form
@@ -87,11 +87,21 @@ const Login = () => {
                     placeholder="Password"
                   />
                 </Form.Item>
-                  <button className="bg-gradient-to-r w-full from-[#39b89e] via-[#39b89e] to-[#39b89e] p-3 my-2 rounded-lg font-bold hover:scale-105">
+                <button className="bg-gradient-to-r w-full from-[#39b89e] via-[#39b89e] to-[#39b89e] p-3 my-2 rounded-lg font-bold hover:scale-105">
                   Log in
                 </button>
               </Form>
+              <div className="text-black">
+                <p>
+                  Username = simon@simon.com
+                </p>
+                <p>
+                  password = kaninos12345
+                </p>
+              </div>
+
             </div>
+
           </div>
         </div>
       </div>
