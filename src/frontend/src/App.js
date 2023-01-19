@@ -20,7 +20,6 @@ import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Protectedroute from "./auth/Protectedroute";
 import RedirectRoute from "./auth/RedirectRoute";
-import { UserAuth } from "./auth/AuthContext";
 import { MdLogout } from "react-icons/md";
 import KaninosLogo from "./assets/logoAnimalss.png";
 
@@ -49,17 +48,8 @@ const App = () => {
   const location = useLocation();
 
   const [open, setOpen] = useState(false);
-  const { user, logIn, logOut } = UserAuth();
   const [collapsed, setCollapsed] = useState(true);
 
-  const handleLogout = async () => {
-    try {
-      await logOut();
-      navigate("/");
-      } catch (error) {
-      console.log(error);
-    }
-  };
 
   const onClose = () => {
     setOpen(false);
@@ -72,7 +62,6 @@ const App = () => {
   const handleDrawerLogoutTime = () => {
     handleDrawer();
     setTimeout(() => {
-      handleLogout();
     }, 200); //used to give the drawer some time to fully close (pending revision to find a better way to logout)
   };
 
@@ -91,8 +80,7 @@ const App = () => {
       <Layout
         style={{
           minHeight: "100vh",
-        }}
-        className={`${!user ? "hidden" : ""}`} //hide the bar when use is not logged in
+        }} //hide the bar when use is not logged in
       >
         {/*Sidebar for compute  */}
         <Sider
@@ -128,7 +116,6 @@ const App = () => {
             <Menu
               theme="dark"
               mode="inline"
-              onClick={handleLogout}
               items={items2}
               className="mb-4 "
             ></Menu>
