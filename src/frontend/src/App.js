@@ -234,50 +234,38 @@ const App = () => {
                 <Route
                   path="/"
                   element={
-                    <Protectedroute>
                       <Dashboard />
-                    </Protectedroute>
                   }
                 />
                 <Route path="/signup" element={<Signup />} />
                 <Route
                   path="/petList"
                   element={
-                    <Protectedroute>
                       <Dogs />
-                    </Protectedroute>
                   }
                 />
                 <Route
                   path="/ownerList"
                   element={
-                    <Protectedroute>
                       <Owners />
-                    </Protectedroute>
                   }
                 />
                 <Route
                   path="/calendar"
                   element={
-                    <Protectedroute>
                       <AppoinmentCalendar />
-                    </Protectedroute>
                   }
                 />
                 <Route
                   path="/pet"
                   element={
-                    <Protectedroute>
                       <DogDetails />
-                    </Protectedroute>
                   }
                 />
                 <Route
                   path="/owner"
                   element={
-                    <Protectedroute>
                       <OwnerDetails />
-                    </Protectedroute>
                   }
                 />
                 <Route path="*" element={<RedirectRoute />} />
