@@ -148,8 +148,7 @@
 								<configuration>
 									<to>
 										<image>
-
-											docker.io/simonbrucedev/${app.image.name}:latest
+											docker.io/simonbrucedev/${app.image.name}:19.1.2023.9.18.52
 										</image>
 									</to>
 								</configuration>

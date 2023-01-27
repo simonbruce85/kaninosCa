@@ -5,7 +5,9 @@ import com.example.kaninosCa.doctor.DoctorService;
 import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.owner.OwnerService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -59,6 +61,18 @@ public class PetController {
         petService.deletePet(id);
     }
 
+    @PostMapping(path = "{id}/profilePicture/upload",
+            consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    public void uploadPetProfileImage(@PathVariable("id") Long id,
+                                      @RequestParam("file")MultipartFile file){
+        petService.uploadPetProfileImage(id, file);
+    }
 
+    @GetMapping("{id}/profilePicture/download")
+    public byte[] downloadProfilePicture(@PathVariable("id") Long id){
+        return petService.downloadProfileImage(id);
+    }
 
 }

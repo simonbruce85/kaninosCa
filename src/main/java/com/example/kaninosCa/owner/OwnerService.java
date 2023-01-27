@@ -19,7 +19,6 @@ public class OwnerService {
 
     public List<Object> getAllOwnersIdAndName(){return ownerRepository.getAllIdsAndNames();}
 
-    @PostMapping
     public void addOwner(Owner owner) {
         Boolean existsPhone = ownerRepository.selectExistsPhone(owner.getPhone());
         if (existsPhone){

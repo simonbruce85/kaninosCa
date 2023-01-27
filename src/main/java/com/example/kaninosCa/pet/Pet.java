@@ -1,6 +1,7 @@
 package com.example.kaninosCa.pet;
 
 import com.example.kaninosCa.doctor.Doctor;
+import com.example.kaninosCa.document.Document;
 import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.vaccine.Vaccine;
 import com.example.kaninosCa.visit.Visit;
@@ -90,10 +91,21 @@ public class Pet {
     )
     private List<Vaccine> vaccines = new ArrayList<>();
 
+    @JsonIgnoreProperties({"pets"})//ignoring only the pets property in order to avoid infinite loops
+    @OneToMany(
+            mappedBy = "pet",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER
+    )
+    private List<Document> documents = new ArrayList<>();
+
     private String name;
     private String type;
     private String breed;
     private String color;
+
+    private String petProfileImageLink;
 
     @NotNull
     @Column(nullable = false)
@@ -120,6 +132,27 @@ public class Pet {
         }
     }
 
+    public void removeVisit(Visit visit) {
+        if (this.visits.contains(visit)) {
+            this.visits.remove(visit);
+        }
+        visit.setPet(null);
+    }
+
+    public void addDocument(Document document) {
+        if (!this.documents.contains(document)) {
+            this.documents.add(document);
+            document.setPet(this);
+        }
+    }
+
+    public void removeDocument(Document document) {
+        if (this.documents.contains(document)) {
+            this.documents.remove(document);
+        }
+        document.setPet(null);
+    }
+
     public void addVaccine(Vaccine vaccine) {
         if (!this.vaccines.contains(vaccine)) {
             this.vaccines.add(vaccine);
@@ -127,12 +160,7 @@ public class Pet {
         }
     }
 
-    public void removeVisit(Visit visit) {
-        if (this.visits.contains(visit)) {
-            this.visits.remove(visit);
-        }
-        visit.setPet(null);
-    }
+
 
     public List<Visit> getVisits() {
         return visits;

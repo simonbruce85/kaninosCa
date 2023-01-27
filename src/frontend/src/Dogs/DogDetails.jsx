@@ -12,6 +12,9 @@ import OwnerDetails from "./DogDetailsDisplay/PetDisplayOwnerDetails";
 import { getEntry } from "../client";
 import { useSearchParams } from "react-router-dom";
 import {isMobile} from 'react-device-detect';
+import { UploadOutlined } from '@ant-design/icons';
+import { Button, message, Upload } from 'antd';
+
 
 const items = [
   {
@@ -65,11 +68,30 @@ const DogDetails = (state) => {
             .then(res => res.json())
             .then(data => {
                 setPet(data);
+                console.log(data)
             })
 
     useEffect(() => {
         fetchPet(petId);
     }, []);
+
+    const props =  {
+      name: 'file',
+      action: `api/v1/pets/${petId}/profilePicture/upload`,
+      method: "post",
+      showUploadList: false,
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+          window.location.reload(false);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
 
   const PageDisplay = () => {
     if (displayContent === "0") {
@@ -93,8 +115,14 @@ const DogDetails = (state) => {
       {/* Avatar section */}
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
-          <Avatar size={128} icon={<UserOutlined />} />
+          <div className="relative">
+          {pet.petProfileImageLink?<img className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px] "  src={`api/v1/pets/${petId}/profilePicture/download`}/>
+          :<Avatar  icon={<UserOutlined />} />}
           <h1>{}</h1>
+          <Upload {...props}>
+            <Button className="absolute bg-[#002140] text-white rounded-full bottom-10 right-0" icon={<UploadOutlined />}></Button>
+          </Upload>
+          </div>
         </div>
       </div>
       {/* End avatar section */}
