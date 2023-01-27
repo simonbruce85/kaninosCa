@@ -52,7 +52,7 @@ useEffect(() => {
         />
         <div>
           {petVisit.visits?.map((visit) => (
-            <VisitCard key={uuidv4()} visit={visit}/>))}
+            <VisitCard key={visit.visitId} visit={visit}/>))}
         </div>
         
       </div> 

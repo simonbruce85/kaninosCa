@@ -80,7 +80,7 @@ public class DocumentService {
         return fileStore.getURL(path);
     }
 
-    public void uploadDocumentToVisit(Long petId,Long visitId, MultipartFile file) {
+    public void uploadDocumentToVisit(Long petId, Long visitId, MultipartFile file) {
         //check if image is not empty
         if (file.isEmpty()){
             throw new IllegalStateException("Cannot upload empty file [ " + file.getSize() + " ]");

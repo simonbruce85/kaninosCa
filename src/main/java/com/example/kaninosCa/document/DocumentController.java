@@ -45,16 +45,16 @@ public class DocumentController {
             consumes = MediaType.MULTIPART_FORM_DATA_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public void uploadDocumentToVisit(@PathVariable("id") Long id,
+    public void uploadDocumentToVisit(@PathVariable("id") Long visitId,
                                     @RequestParam("file") MultipartFile file){
-        Long petId = visitService.getVisitById(id).getPet().getId();
-        documentService.uploadDocumentToVisit(id, petId, file);
+        Long petId = visitService.getVisitById(visitId).getPet().getId();
+        documentService.uploadDocumentToVisit(petId, visitId, file);
     }
 
     @GetMapping("/visit/{id}/download/{key}")
-    public String getUrlDocumentFromVisit(@PathVariable("id") Long id, @PathVariable("key") String key){
-        Long petId = visitService.getVisitById(id).getPet().getId();
-        return documentService.getUrlDocumentFromVisit(id, petId, key);
+    public String getUrlDocumentFromVisit(@PathVariable("id") Long visitId, @PathVariable("key") String key){
+        Long petId = visitService.getVisitById(visitId).getPet().getId();
+        return documentService.getUrlDocumentFromVisit(visitId, petId, key);
     }
 
     //method to test if I can show the file on the website without downloading it.
