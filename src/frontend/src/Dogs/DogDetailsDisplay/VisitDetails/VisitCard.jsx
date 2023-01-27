@@ -1,7 +1,8 @@
-import { Button, Col, Descriptions, Form, Input, Row, Select, Tag } from 'antd'
+import { Button, Col, Descriptions, Form, Input, Row, Select, Tag, message, Upload } from 'antd'
 import React, { useEffect, useState } from 'react'
-import { addNewEntry, addNewVaccineToVisit, getEntry, getVaccines } from '../../../client'
+import { addNewVaccineToVisit, getDocLinkFromVisit, getEntry, getVaccines } from '../../../client'
 import { successNotification } from '../../../Notification'
+import { UploadOutlined } from '@ant-design/icons';
 
 const VisitCard = ({visit}) => {
   const {
@@ -36,7 +37,33 @@ useEffect(() => {
     fetchVaccines();
 }, []);
 
+const propsDocs =  {
+  name: 'file',
+  action: `api/v1/documents/visit/${visitId}/document/upload`,
+  method: "post",
+  onChange(info) {
+    if (info.file.status !== 'uploading') {
+      console.log(info.file, info.fileList);
+    }
+    if (info.file.status === 'done') {
+      message.success(`${info.file.name} file uploaded successfully`);
+      window.location.reload(false);
+    } else if (info.file.status === 'error') {
+      message.error(`${info.file.name} file upload failed.`);
+    }
+  },
+};
 
+//Used to open in a new window the document link after fetching the info
+const handleClick = (id, key) =>{
+  console.log(id,key)
+  getDocLinkFromVisit(id, key)
+  .then(res => res.text())
+  .then(data => {
+    window.open(data)
+  })
+
+}
 
   const onFinish = ( vaccine ) => {
     console.log(JSON.stringify(vaccine, null, 2));
@@ -118,6 +145,7 @@ useEffect(() => {
                     ))}
                 </Select>
               </Form.Item>
+              
           </Row>
           <Form.Item>
                 <Button type="default" htmlType="submit">
@@ -126,6 +154,20 @@ useEffect(() => {
               </Form.Item>
           </Form>
     </Descriptions.Item>
+    <Descriptions.Item label="Documents">
+        <div className="flex flex-col">
+          {visit.documents?.map((document) => (
+            // <a key={document.id} rel="noopener noreferrer" href={`api/v1/documents/pets/${pet.id}/download/${document.documentLink}`} target="_blank">{document.name}</a>
+            <div>
+              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>{document.name}</button>
+            </div>
+            )
+          )}
+        </div>
+        <Upload {...propsDocs}>
+            <Button className="" icon={<UploadOutlined />}></Button>
+          </Upload>
+      </Descriptions.Item>
   </Descriptions>
   )
 }

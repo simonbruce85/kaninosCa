@@ -1,6 +1,7 @@
 package com.example.kaninosCa.document;
 
 import com.example.kaninosCa.pet.Pet;
+import com.example.kaninosCa.visit.Visit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -28,8 +29,8 @@ public class Document {
             name = "id"
     )
     private Long id;
-    private String name;
     private String documentLink;
+    private String name;
 
     @ManyToOne
     @JoinColumn(
@@ -40,4 +41,14 @@ public class Document {
             )
     )
     private Pet pet;
+
+    @ManyToOne
+    @JoinColumn(
+            name = "visit_document",
+            referencedColumnName = "visitId",
+            foreignKey = @ForeignKey(
+                    name = "document_visit_fk"
+            )
+    )
+    private Visit visit;
 }

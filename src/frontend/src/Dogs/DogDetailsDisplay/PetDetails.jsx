@@ -1,7 +1,10 @@
 import { Descriptions, Tag } from "antd";
-import React from "react";
+import React, { useState } from "react";
+import { getDocLinks } from "../../client";
 
-const PetDetails = ({pet}) => {
+const PetDetails = ({ pet }) => {
+  const [documentLink, setDocumentLink] = useState("")
+
   const isAboutToExpire = (lastVaccine) => {
     let date1 = new Date(lastVaccine).getTime() / 1000 / 3600 / 24;
     let date2 = new Date().getTime() / 1000 / 3600 / 24; //covnerting to date
@@ -15,6 +18,19 @@ const PetDetails = ({pet}) => {
     }
     return "green";
   };
+
+  console.log(pet)
+
+  //Used to open in a new window the document link after fetching the info
+  const handleClick = (id, key) =>{
+    console.log(id,key)
+    getDocLinks(id, key)
+    .then(res => res.text())
+    .then(data => {
+      window.open(data)
+    })
+
+  }
 
   const typeOfAnimalShowVaccine = (typeOfPet) => {
     if (typeOfPet === "dog") {
@@ -92,7 +108,7 @@ const PetDetails = ({pet}) => {
           <div className="grid gap-2  grid-cols-2">
             <div>Quintuple</div>
             <Tag className="w-fit min-w-[100px] flex justify-center items-center" color={isAboutToExpire(pet.lastQuint)}>
-              {pet.lastQuint ? pet.lastQuint : "No Data"} 
+              {pet.lastQuint ? pet.lastQuint : "No Data"}
             </Tag>
           </div>
         </>
@@ -119,7 +135,7 @@ const PetDetails = ({pet}) => {
       <Descriptions.Item label="Name" labelStyle={{ width: "100px" }}>
         {pet.name}
       </Descriptions.Item>
-      <Descriptions.Item label="DOB">{pet.dob?.slice(8,10)}/{pet.dob?.slice(5,7)}/{pet.dob?.slice(0,4)} {"(DD/MM/AAAA)"}</Descriptions.Item>
+      <Descriptions.Item label="DOB">{pet.dob?.slice(8, 10)}/{pet.dob?.slice(5, 7)}/{pet.dob?.slice(0, 4)} {"(DD/MM/AAAA)"}</Descriptions.Item>
       <Descriptions.Item label="Type">{pet.type}</Descriptions.Item>
       <Descriptions.Item label="Breed">{pet.breed}</Descriptions.Item>
       <Descriptions.Item label="Color">{pet.color}</Descriptions.Item>
@@ -131,6 +147,17 @@ const PetDetails = ({pet}) => {
         </div>
       </Descriptions.Item>
       <Descriptions.Item label="Notes">{pet.notes}</Descriptions.Item>
+      <Descriptions.Item label="Documents">
+        <div className="flex flex-col">
+          {pet.documents?.map((document) => (
+            // <a key={document.id} rel="noopener noreferrer" href={`api/v1/documents/pets/${pet.id}/download/${document.documentLink}`} target="_blank">{document.name}</a>
+            <div>
+              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>{document.name}</button>
+            </div>
+            )
+          )}
+        </div>
+      </Descriptions.Item>
     </Descriptions>
   );
 };

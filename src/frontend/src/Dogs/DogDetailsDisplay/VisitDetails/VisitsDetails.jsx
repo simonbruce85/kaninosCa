@@ -54,6 +54,7 @@ useEffect(() => {
           {petVisit.visits?.map((visit) => (
             <VisitCard key={uuidv4()} visit={visit}/>))}
         </div>
+        
       </div> 
      </div>
   );

@@ -1,5 +1,6 @@
 package com.example.kaninosCa.visit;
 
+import com.example.kaninosCa.document.Document;
 import com.example.kaninosCa.pet.Pet;
 import com.example.kaninosCa.vaccine.Vaccine;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,6 +18,7 @@ import java.util.List;
 @NoArgsConstructor
 @Entity
 @Table
+@AllArgsConstructor
 public class Visit {
 
     @Id
@@ -79,6 +81,15 @@ public class Visit {
     )
     private List<Vaccine> vaccines = new ArrayList<>();
 
+    @JsonIgnoreProperties({"visit"})//ignoring only the pets property in order to avoid infinite loops
+    @OneToMany(
+            mappedBy = "visit",
+            orphanRemoval = true,
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    private List<Document> documents = new ArrayList<>();
+
     public void addVaccineToVisit(Vaccine vaccine) {
         vaccines.add(vaccine);
         vaccine.getVisits().add(this);
@@ -89,17 +100,18 @@ public class Visit {
         vaccine.getVisits().remove(this);
     }
 
-    public Visit(Long visitId, Long doctorId, String date, String doctor, String visitReason, String symptoms, String diagnostic, String clinicTreatment, String atHomeTreatment, Pet pet, List<Vaccine> vaccines) {
-        this.visitId = visitId;
-        this.doctorId = doctorId;
-        this.date = date;
-        this.doctor = doctor;
-        this.visitReason = visitReason;
-        this.symptoms = symptoms;
-        this.diagnostic = diagnostic;
-        this.clinicTreatment = clinicTreatment;
-        this.atHomeTreatment = atHomeTreatment;
-        this.pet = pet;
-        this.vaccines = vaccines;
+    public void addDocument(Document document) {
+        if (!this.documents.contains(document)) {
+            this.documents.add(document);
+            document.setVisit(this);
+        }
     }
+
+    public void removeDocument(Document document) {
+        if (this.documents.contains(document)) {
+            this.documents.remove(document);
+        }
+        document.setVisit(null);
+    }
+
 }

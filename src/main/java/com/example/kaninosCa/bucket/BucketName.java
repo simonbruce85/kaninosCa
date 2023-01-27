@@ -2,7 +2,7 @@ package com.example.kaninosCa.bucket;
 
 public enum BucketName {
 
-    PROFILE_IMAGE("kaninosbucket");
+    BUCKET_NAME("kaninosbucket");
 
     private final String bucketName;
 

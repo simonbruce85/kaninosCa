@@ -87,16 +87,16 @@ public class Pet {
             mappedBy = "pet",
             orphanRemoval = true,
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Vaccine> vaccines = new ArrayList<>();
 
-    @JsonIgnoreProperties({"pets"})//ignoring only the pets property in order to avoid infinite loops
+    @JsonIgnoreProperties({"pet"})//ignoring only the pets property in order to avoid infinite loops
     @OneToMany(
             mappedBy = "pet",
             orphanRemoval = true,
             cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER
+            fetch = FetchType.LAZY
     )
     private List<Document> documents = new ArrayList<>();
 

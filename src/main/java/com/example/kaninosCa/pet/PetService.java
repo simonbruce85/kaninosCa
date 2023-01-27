@@ -90,12 +90,12 @@ public class PetService {
         metadata.put("Content-Length", String.valueOf(file.getSize()));
 
         //path format
-        String path = String.format("%s/Pets/%s/profileImage", BucketName.PROFILE_IMAGE.getBucketName(), id);
+        String path = String.format("%s/pets/%s/profileImage", BucketName.BUCKET_NAME.getBucketName(), id);
         String filename = String.format("%s-%s", file.getOriginalFilename(), UUID.randomUUID());
 
         try {
             fileStore.save(path,filename,Optional.of(metadata),file.getInputStream());
-//          //save pet with new profile image link
+          //save pet with new profile image link
             Pet pet = getPetById(id);
             pet.setPetProfileImageLink(filename);
             petRepository.save(pet);
@@ -106,7 +106,7 @@ public class PetService {
 
     byte[] downloadProfileImage(Long id){
         Pet pet = getPetById(id);
-        String path = String.format("%s/Pets/%s/profileImage", BucketName.PROFILE_IMAGE.getBucketName(), id);
+        String path = String.format("%s/pets/%s/profileImage", BucketName.BUCKET_NAME.getBucketName(), id);
         return fileStore.download(path, pet.getPetProfileImageLink());
     }
 }

@@ -69,3 +69,8 @@ export const deleteEntry = (entry, entryId) =>
   export const getVaccines = () =>
   fetch(`api/v1/vaccines`).then(checkStatus);
 
+  export const getDocLinks = (id, key) =>
+  fetch(`api/v1/documents/pet/${id}/download/${key}`).then(checkStatus);
+
+  export const getDocLinkFromVisit = (id, key) =>
+  fetch(`api/v1/documents/visit/${id}/download/${key}`).then(checkStatus);

@@ -6,9 +6,12 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectInputStream;
 import com.amazonaws.util.IOUtils;
+import com.example.kaninosCa.bucket.BucketName;
+import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
@@ -46,6 +49,16 @@ public class FileStore {
             S3ObjectInputStream inputStream = object.getObjectContent();
             return IOUtils.toByteArray(inputStream);
         }catch (AmazonServiceException | IOException e){
+            throw new IllegalStateException("Failed to download file", e);
+        }
+    }
+
+    public String getURL(String key)
+    {
+        try {
+            return s3.generatePresignedUrl(BucketName.BUCKET_NAME.getBucketName(), key, new DateTime().plusMinutes(1).toDate()).toString();
+        }
+        catch (AmazonServiceException e){
             throw new IllegalStateException("Failed to download file", e);
         }
     }

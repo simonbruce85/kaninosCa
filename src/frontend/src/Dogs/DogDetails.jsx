@@ -93,6 +93,23 @@ const DogDetails = (state) => {
       },
     };
 
+    const propsDocs =  {
+      name: 'file',
+      action: `api/v1/documents/pet/${petId}/document/upload`,
+      method: "post",
+      onChange(info) {
+        if (info.file.status !== 'uploading') {
+          console.log(info.file, info.fileList);
+        }
+        if (info.file.status === 'done') {
+          message.success(`${info.file.name} file uploaded successfully`);
+          window.location.reload(false);
+        } else if (info.file.status === 'error') {
+          message.error(`${info.file.name} file upload failed.`);
+        }
+      },
+    };
+
   const PageDisplay = () => {
     if (displayContent === "0") {
       return <PetDetails pet={pet}/>;
@@ -115,12 +132,15 @@ const DogDetails = (state) => {
       {/* Avatar section */}
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
-          <div className="relative">
+          <div className="relative ">
           {pet.petProfileImageLink?<img className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px] "  src={`api/v1/pets/${petId}/profilePicture/download`}/>
-          :<Avatar  icon={<UserOutlined />} />}
+          :<Avatar size={isMobile?128:200}  icon={<UserOutlined />} />}
           <h1>{}</h1>
           <Upload {...props}>
             <Button className="absolute bg-[#002140] text-white rounded-full bottom-10 right-0" icon={<UploadOutlined />}></Button>
+          </Upload>
+          <Upload {...propsDocs}>
+            <Button className="" icon={<UploadOutlined />}></Button>
           </Upload>
           </div>
         </div>
