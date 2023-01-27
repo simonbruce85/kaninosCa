@@ -156,11 +156,12 @@ public class Pet {
     public void addVaccine(Vaccine vaccine) {
         if (!this.vaccines.contains(vaccine)) {
             this.vaccines.add(vaccine);
-
         }
     }
 
-
+    public void setPetProfileImageLink(String petProfileImageLink) {
+        this.petProfileImageLink = petProfileImageLink;
+    }
 
     public List<Visit> getVisits() {
         return visits;

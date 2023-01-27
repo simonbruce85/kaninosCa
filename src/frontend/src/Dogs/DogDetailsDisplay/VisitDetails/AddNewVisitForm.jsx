@@ -20,6 +20,7 @@ import {
 import { isMobile } from "react-device-detect";
 
 
+
 const { Option } = Select;
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
@@ -27,6 +28,7 @@ const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />;
 function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
   const onCLose = () => setShowDrawer(false);
   const [submitting, setSubmitting] = useState(false);
+  const [form] = Form.useForm();//used to reset the form values after submitting
   
 
 
@@ -49,6 +51,7 @@ function AddNewVisitForm({ showDrawer, setShowDrawer, petId, fetchPetVisits }) {
       })
       .finally(() => {
         setSubmitting(false);
+        form.resetFields();//used to reset the form values after submitting
       });
   };
   

@@ -1,8 +1,9 @@
 import { Button, Col, Descriptions, Form, Input, Row, Select, Tag, message, Upload } from 'antd'
 import React, { useEffect, useState } from 'react'
 import { addNewVaccineToVisit, getDocLinkFromVisit, getEntry, getVaccines } from '../../../client'
-import { successNotification } from '../../../Notification'
+import { errorNotification, successNotification } from '../../../Notification'
 import { UploadOutlined } from '@ant-design/icons';
+import { isMobile } from 'react-device-detect';
 
 const VisitCard = ({visit}) => {
   const {
@@ -29,7 +30,6 @@ const fetchVaccines = () =>{
       .then(res => res.json())
           .then(data => {
             setVaccineList(data)
-            console.log(data)
           })
       }
 
@@ -43,7 +43,6 @@ const propsDocs =  {
   method: "post",
   onChange(info) {
     if (info.file.status !== 'uploading') {
-      console.log(info.file, info.fileList);
     }
     if (info.file.status === 'done') {
       message.success(`${info.file.name} file uploaded successfully`);
@@ -77,8 +76,14 @@ const handleClick = (id, key) =>{
         window.location.reload(false);
       })
       .catch((err) => {
-        console.log(err);
-        console.log("error addinng new vaccine");
+        console.log(err.response);
+        err.response.json().then((res) => {
+          errorNotification(
+            "There was and issue",
+            `${res.message} [statusCode:${res.status}] [${res.error}]`,
+            "bottomLeft"
+          );
+        });
       })
       .finally(() => {
         setOpenVaccine(false);
@@ -114,10 +119,7 @@ const handleClick = (id, key) =>{
       <div className='"max-w-[10%]"'> 
     <Button
             onClick={() => setOpenVaccine(true)}
-            type="default"
-            shape="round"
-            size="small"
-            className={ openVaccine?`hidden`:`flex items-center justify-center" `}
+            className={ openVaccine?`hidden`:`flex items-center justify-center rounded-lg mt-4`}
           >
             Add New Vaccine
           </Button>
@@ -159,13 +161,16 @@ const handleClick = (id, key) =>{
           {visit.documents?.map((document) => (
             // <a key={document.id} rel="noopener noreferrer" href={`api/v1/documents/pets/${pet.id}/download/${document.documentLink}`} target="_blank">{document.name}</a>
             <div>
-              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>{document.name}</button>
+              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>
+                {/*Slicing the string to fit in mobile devices when is longer than 20 characteres */}
+                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>20?document.name.slice(0,20):document.name}</Tag>
+                </button>
             </div>
             )
           )}
         </div>
         <Upload {...propsDocs}>
-            <Button className="" icon={<UploadOutlined />}></Button>
+            <Button className="rounded-lg mt-4" icon={<UploadOutlined />}>Select File</Button>
           </Upload>
       </Descriptions.Item>
   </Descriptions>

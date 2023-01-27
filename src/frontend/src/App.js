@@ -24,6 +24,7 @@ import { UserAuth } from "./auth/AuthContext";
 import { MdLogout } from "react-icons/md";
 import KaninosLogo from "./assets/logoAnimalss.png";
 
+
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -162,11 +163,12 @@ const App = () => {
             closable={false}
             width={250}
             zIndex={10}
+            bodyStyle={{backgroundColor: '#15325b'}}
             className="mt-[80px]"
           >
-            <ul className="w-full justify-start text-black">
+            <ul className="w-full flex flex-col text-gray-300  h-2/5 ">
               <li
-                className=" flex items-center py-2"
+                className=" flex items-center text-lg py-2 "
                 onClick={() => {
                   navigate("/");
                   handleDrawer();
@@ -175,7 +177,7 @@ const App = () => {
                 <PieChartOutlined className="px-2" /> Dashboard
               </li>
               <li
-                className=" flex py-2 items-center"
+                className=" flex text-lg py-2 items-center "
                 onClick={() => {
                   navigate("/petList");
                   handleDrawer();
@@ -184,7 +186,7 @@ const App = () => {
                 <FaDog className="px-2 w-[32px] " /> Pets
               </li>
               <li
-                className=" flex py-2 items-center"
+                className=" flex py-2 items-center text-lg"
                 onClick={() => {
                   navigate("/ownerList");
                   handleDrawer();
@@ -193,7 +195,7 @@ const App = () => {
                 <UserOutlined className="px-2 " /> Owners
               </li>
               <li
-                className="flex py-2 items-center"
+                className="flex py-2 items-center text-lg"
                 onClick={() => {
                   navigate("/calendar");
                   handleDrawer();
@@ -202,7 +204,7 @@ const App = () => {
                 <CalendarOutlined className="px-2" /> Calendar
               </li>
               <li
-                className="flex py-2 items-center"
+                className="flex py-2 items-center text-lg"
                 onClick={() => {
                   handleDrawerLogoutTime();
                 }}

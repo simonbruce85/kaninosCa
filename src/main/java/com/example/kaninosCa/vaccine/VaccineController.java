@@ -35,6 +35,7 @@ public class VaccineController {
         vaccineService.addVaccine(vaccine);
     }
 
+    //many-to-many relationship
     @PutMapping(path = "{petId}/{vaccineId}/visit/{visitId}")
     public void addVaccine(
             @PathVariable Long petId,
@@ -44,9 +45,7 @@ public class VaccineController {
         Pet pet = petService.getPetById(petId);
         Visit visit = visitService.getVisitById(visitId);
         Vaccine vaccine = vaccineService.getVaccineById(vaccineId);
-        visit.addVaccineToVisit(vaccine);
-        pet.setLastVaccine(vaccine.getId());
-        visitService.addVisit(visit);
+        vaccineService.addVaccineToVisit(pet,visit,vaccine);
     }
 
 

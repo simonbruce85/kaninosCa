@@ -12,6 +12,7 @@ const removeDog = (id, callback, petName) => {
     .then(() => {
       successNotification("Dog deleted", `${petName} has been deleted`);
       callback();
+      
     })
     .catch((err) => {
       console.log("error removing")
@@ -34,19 +35,10 @@ const columnsMobile = (fetchDogs, navigate) => [
     sorter: true,
   },
   {
-    title: "Type",
-    dataIndex: "type",
-    key: "type",
-    filters: [
-      {
-        text: "Dog",
-        value: "dog",
-      },
-      {
-        text: "Cat",
-        value: "cat",
-      },
-    ],
+    title: "Owner",
+    dataIndex: "owner",
+    key: "owner",
+    render: (owner) => `${owner.name}`,
   },
   {
     title: "Actions",
@@ -85,19 +77,10 @@ const columns = (fetchDogs, navigate) => [
     sorter: true,
   },
   {
-    title: "Type",
-    dataIndex: "type",
-    key: "type",
-    filters: [
-      {
-        text: "Dog",
-        value: "dog",
-      },
-      {
-        text: "Cat",
-        value: "cat",
-      },
-    ],
+    title: "Owner",
+    dataIndex: "owner",
+    key: "owner",
+    render: (owner) => `${owner.name}`,
   },
   {
     title: "Breed",
@@ -151,6 +134,7 @@ const Dogs = () => {
       .then((res) => res.json())
       .then((data) => {
         setPets(data);
+        console.log(data)
         setTableParams({
           ...tableParams,
           pagination: {

@@ -35,10 +35,7 @@ useEffect(() => {
         <div className="flex items-center">
           <Button
             onClick={() => setShowDrawer(!showDrawer)}
-            type="default"
-            shape="round"
-            size="small"
-            className="flex items-center justify-center"
+            className="flex items-center justify-center rounded-lg ml-8"
           >
             Add New Visit
           </Button>

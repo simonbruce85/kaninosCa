@@ -28,4 +28,14 @@ public class VaccineService {
     }
 
     public Vaccine getVaccineById(Long id){ return vaccineRepository.findById(id).get();}
+
+    public void addVaccineToVisit(Pet pet, Visit visit, Vaccine vaccine){
+        if (!visit.getVaccines().contains(vaccine)){
+            visit.addVaccineToVisit(vaccine);
+            pet.setLastVaccine(vaccine.getId());
+            vaccineRepository.save(vaccine);
+        }else{
+            throw new IllegalStateException("Vaccine already added to this visit");
+        }
+    }
 }

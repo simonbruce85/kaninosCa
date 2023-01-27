@@ -1,9 +1,9 @@
-import { Descriptions, Tag } from "antd";
-import React, { useState } from "react";
+import { Descriptions, message, Tag,Button,Upload } from "antd";
+import React from "react";
 import { getDocLinks } from "../../client";
+import { UploadOutlined } from '@ant-design/icons';
 
 const PetDetails = ({ pet }) => {
-  const [documentLink, setDocumentLink] = useState("")
 
   const isAboutToExpire = (lastVaccine) => {
     let date1 = new Date(lastVaccine).getTime() / 1000 / 3600 / 24;
@@ -17,6 +17,23 @@ const PetDetails = ({ pet }) => {
       return "red";
     }
     return "green";
+  };
+
+  const propsDocs =  {
+    name: 'file',
+    action: `api/v1/documents/pet/${pet.id}/document/upload`,
+    method: "post",
+    onChange(info) {
+      if (info.file.status !== 'uploading') {
+        console.log(info.file, info.fileList);
+      }
+      if (info.file.status === 'done') {
+        message.success(`${info.file.name} file uploaded successfully`);
+        window.location.reload(false);
+      } else if (info.file.status === 'error') {
+        message.error(`${info.file.name} file upload failed.`);
+      }
+    },
   };
 
   console.log(pet)
@@ -152,10 +169,15 @@ const PetDetails = ({ pet }) => {
           {pet.documents?.map((document) => (
             // <a key={document.id} rel="noopener noreferrer" href={`api/v1/documents/pets/${pet.id}/download/${document.documentLink}`} target="_blank">{document.name}</a>
             <div>
-              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>{document.name}</button>
+              <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>
+                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>20?document.name.slice(0,20):document.name}</Tag>
+                </button>
             </div>
             )
           )}
+          <Upload {...propsDocs}>
+            <Button className="mt-4" icon={<UploadOutlined />}></Button>
+          </Upload>
         </div>
       </Descriptions.Item>
     </Descriptions>

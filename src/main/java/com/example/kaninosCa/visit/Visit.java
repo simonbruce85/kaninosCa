@@ -91,8 +91,10 @@ public class Visit {
     private List<Document> documents = new ArrayList<>();
 
     public void addVaccineToVisit(Vaccine vaccine) {
-        vaccines.add(vaccine);
-        vaccine.getVisits().add(this);
+        if (!this.vaccines.contains(vaccine)) {
+            this.vaccines.add(vaccine);
+            vaccine.getVisits().add(this);
+        }
     }
 
     public void removeVaccineFromVisit(Vaccine vaccine){

@@ -42,7 +42,7 @@ const itemsMobile = [
     icon: <FileOutlined />,
   },
   {
-    label: "Owner ",
+    label: "Owner",
     key: 1,
     icon: <UserOutlined />,
     
@@ -93,22 +93,7 @@ const DogDetails = (state) => {
       },
     };
 
-    const propsDocs =  {
-      name: 'file',
-      action: `api/v1/documents/pet/${petId}/document/upload`,
-      method: "post",
-      onChange(info) {
-        if (info.file.status !== 'uploading') {
-          console.log(info.file, info.fileList);
-        }
-        if (info.file.status === 'done') {
-          message.success(`${info.file.name} file uploaded successfully`);
-          window.location.reload(false);
-        } else if (info.file.status === 'error') {
-          message.error(`${info.file.name} file upload failed.`);
-        }
-      },
-    };
+    
 
   const PageDisplay = () => {
     if (displayContent === "0") {
@@ -133,27 +118,23 @@ const DogDetails = (state) => {
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
           <div className="relative ">
-          {pet.petProfileImageLink?<img className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px] "  src={`api/v1/pets/${petId}/profilePicture/download`}/>
+          {pet.petProfileImageLink?<img className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px]" src={`api/v1/pets/${petId}/profilePicture/download`}/>
           :<Avatar size={isMobile?128:200}  icon={<UserOutlined />} />}
           <h1>{}</h1>
           <Upload {...props}>
             <Button className="absolute bg-[#002140] text-white rounded-full bottom-10 right-0" icon={<UploadOutlined />}></Button>
           </Upload>
-          <Upload {...propsDocs}>
-            <Button className="" icon={<UploadOutlined />}></Button>
-          </Upload>
           </div>
         </div>
       </div>
       {/* End avatar section */}
-      <div className="flex justify-center">
         <Menu
           onClick={onClick}
           selectedKeys={[current]}
           mode="horizontal"
           items={isMobile?itemsMobile:items}
+          className="flex justify-center"
         />
-      </div>
       <div className="w-full flex justify-center p-2 pt-4">
       {PageDisplay()}
       </div>
