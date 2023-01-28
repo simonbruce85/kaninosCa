@@ -34,13 +34,13 @@ const Login = () => {
 
   return (
     <>
-      <div className="w-full h-screen flex justify-center bg-gray-300 items-center">
+      <div className="w-full min-h-screen flex justify-center bg-gray-300 items-center">
         {/* <img
           className="block absolute w-full h-full object-cover"
           src="https://cdn.pixabay.com/photo/2015/11/03/12/58/dalmatian-1020790_960_720.jpg"
           alt="background"
         /> */}
-        <div className=" w-full max-w-[80%] sm:max-w-[50%] md:max-w-[50%]  lg:w-[50%] flex shadow-md bg-white rounded-xl">
+        <div className=" w-full max-w-[80%] my-4 sm:max-w-[50%] md:max-w-[50%]  lg:w-[50%] flex shadow-md bg-white rounded-xl">
           <img src={video1} className=" max-w-[40%] hidden xl:block rounded-l-xl" />
           <div className="w-full flex justify-center">
             <div className="max-w-[450px] mx-[8px] md:w-full md:max-w-1/2 bg-white text-white">

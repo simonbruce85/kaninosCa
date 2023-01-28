@@ -120,11 +120,11 @@ const App = () => {
           </div>
           <div className="h-[90%] flex flex-col justify-between mb-4">
             <Menu
-              theme="dark"
               defaultSelectedKeys={location.pathname} //used location from react router dom to pass the currently open path to the default selected key
               mode="inline"
               items={items}
               onClick={({ key }) => navigate(key)}
+              theme={'dark'}
             />
             <Menu
               theme="dark"
@@ -138,7 +138,7 @@ const App = () => {
         {/*Sidebar for computer ends */}
 
         {/*Navbar for mobile */}
-        <div className="md:hidden fixed w-full h-[80px] flex justify-between items-center px-4 bg-[#041F31] text-white z-10">
+        <div className="md:hidden fixed w-full h-[80px] flex justify-between items-center  bg-[#041F31] text-white z-20">
           <div className="">
             <img
               src={Logo}
@@ -157,14 +157,14 @@ const App = () => {
           </div>
           {/* Mobile Menus*/}
           <Drawer
-            placement="right"
+            placement="top"
             onClose={onClose}
             open={open}
             closable={false}
             width={250}
             zIndex={10}
-            bodyStyle={{backgroundColor: '#15325b'}}
-            className="mt-[80px]"
+            bodyStyle={{backgroundColor: '#041F31'}}
+            className="mt-[80px] z-10"
           >
             <ul className="w-full flex flex-col text-gray-300  h-2/5 ">
               <li
