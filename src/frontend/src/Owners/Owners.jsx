@@ -98,23 +98,23 @@ const Owners = () => {
   const navigate = useNavigate();
 
   const fetchOwners = () => {
-  setFetching(true);
-  getAllRows("owners")
-    .then((res) => res.json())
-    .then((data) => {
-      setOwners(data);
-    })
-    .catch((err) => {
-      console.log(err.response);
-      console.log("error adding owner")
-      err.response.json().then((res) => {
-        console.log(res);
-        errorNotification(
-          "There was and issue",
-          `${res.message} [statusCode:${res.status}] [${res.error}]`
-        );
-      });
-    }).finally(() => setFetching(false));
+    setFetching(true);
+    getAllRows("owners")
+      .then((res) => res.json())
+      .then((data) => {
+        setOwners(data);
+      })
+      .catch((err) => {
+        console.log(err.response);
+        console.log("error adding owner")
+        err.response.json().then((res) => {
+          console.log(res);
+          errorNotification(
+            "There was and issue",
+            `${res.message} [statusCode:${res.status}] [${res.error}]`
+          );
+        });
+      }).finally(() => setFetching(false));
   };
 
   useEffect(() => {

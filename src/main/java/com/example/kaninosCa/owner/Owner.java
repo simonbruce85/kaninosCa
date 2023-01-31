@@ -1,8 +1,6 @@
 package com.example.kaninosCa.owner;
 
 import com.example.kaninosCa.pet.Pet;
-import com.example.kaninosCa.visit.Visit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.*;
 

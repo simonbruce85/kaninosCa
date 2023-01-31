@@ -2,7 +2,6 @@ package com.example.kaninosCa.document;
 
 import com.example.kaninosCa.pet.Pet;
 import com.example.kaninosCa.visit.Visit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;

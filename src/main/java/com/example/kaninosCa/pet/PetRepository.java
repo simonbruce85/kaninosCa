@@ -15,10 +15,6 @@ public interface PetRepository extends JpaRepository<Pet,Long> {
 
     public List<Pet> findPetByOwner(Long ownerId);
 
-
-    public List<Pet> findByType(String name);
-    public List<Pet> findByTypeNot(String name);
-
     @Query("" + "SELECT CASE WHEN COUNT(s) > 0 THEN " + "TRUE ELSE FALSE END " + "FROM Owner s " + "WHERE s.phone = ?1 ")
     Boolean selectExistsName(String name);
 

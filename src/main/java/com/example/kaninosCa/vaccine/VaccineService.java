@@ -2,7 +2,6 @@ package com.example.kaninosCa.vaccine;
 
 import com.example.kaninosCa.pet.Pet;
 import com.example.kaninosCa.visit.Visit;
-import com.example.kaninosCa.visit.VisitRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;

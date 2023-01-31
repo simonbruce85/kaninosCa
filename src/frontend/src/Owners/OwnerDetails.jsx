@@ -23,7 +23,7 @@ const items = [
     label: "Pet List",
     key: 1,
     icon: <AppstoreOutlined />,
-    
+
   },
 ];
 
@@ -36,23 +36,23 @@ const OwnerDetails = (state) => {
   const ownerId = searchParams.get("ownerId") //getting the value from the query param from URL
 
   const fetchOwner = (ownerId) =>
-        getEntry("owners", ownerId)
-            .then(res => res.json())
-            .then(data => {
-                setOwner(data);
-                console.log(data)
-            })
+    getEntry("owners", ownerId)
+      .then(res => res.json())
+      .then(data => {
+        setOwner(data);
+        console.log(data)
+      })
 
-    useEffect(() => {
-        fetchOwner(ownerId);
-        
-    }, []);
+  useEffect(() => {
+    fetchOwner(ownerId);
+
+  }, []);
 
   const PageDisplay = () => {
     if (displayContent === "0") {
-      return <OwnerInformation owner={owner}/>;
-    }  else {
-      return (owner.pets.length !== 0 ?<OwnerPetList owner={owner}/>:<div>This owner has no pets yet!</div>);//checking if the owner has pets
+      return <OwnerInformation owner={owner} />;
+    } else {
+      return (owner.pets.length !== 0 ? <OwnerPetList owner={owner} /> : <div>This owner has no pets yet!</div>);//checking if the owner has pets
     }
   };
 
@@ -63,13 +63,13 @@ const OwnerDetails = (state) => {
   };
 
   return (
-    
+
     <div className="w-full min-h-screen ">
       {/* Avatar section */}
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
           <Avatar size={128} icon={<UserOutlined />} />
-          <h1>{}</h1>
+          <h1>{ }</h1>
         </div>
       </div>
       {/* End avatar section */}
@@ -82,7 +82,7 @@ const OwnerDetails = (state) => {
         />
       </div>
       <div className="w-full flex justify-center p-2">
-      {PageDisplay()}
+        {PageDisplay()}
       </div>
     </div>
   );

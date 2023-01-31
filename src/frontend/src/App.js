@@ -8,9 +8,9 @@ import { Layout, Menu, Drawer } from "antd";
 import React, { useState } from "react";
 import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import AppoinmentCalendar from "./Calendar/AppoinmentCalendar";
-import Dogs from "./Dogs/Dogs";
+import PetList from "./Pets/PetList";
 import Dashboard from "./pages/Dashboard";
-import DogDetails from "./Dogs/DogDetails";
+import DogDetails from "./Pets/PetInformation";
 import { FaDog } from "react-icons/fa";
 import Owners from "./Owners/Owners";
 import OwnerDetails from "./Owners/OwnerDetails";
@@ -22,7 +22,6 @@ import Protectedroute from "./auth/Protectedroute";
 import RedirectRoute from "./auth/RedirectRoute";
 import { UserAuth } from "./auth/AuthContext";
 import { MdLogout } from "react-icons/md";
-import KaninosLogo from "./assets/logoAnimalss.png";
 
 
 const { Content, Footer, Sider } = Layout;
@@ -50,7 +49,7 @@ const App = () => {
   const location = useLocation();
 
   const [open, setOpen] = useState(false);
-  const { user, logIn, logOut } = UserAuth();
+  const { user, logOut } = UserAuth();
   const [collapsed, setCollapsed] = useState(true);
 
   const handleLogout = async () => {
@@ -138,20 +137,19 @@ const App = () => {
         {/*Sidebar for computer ends */}
 
         {/*Navbar for mobile */}
-        <div className="md:hidden fixed w-full h-[80px] flex justify-between items-center  bg-[#041F31] text-white z-20">
+        <div className="md:hidden pl-4 pr-2 fixed w-full h-[80px] flex justify-between items-center bg-[#041F31] text-white z-20">
           <div className="">
             <img
               src={Logo}
               alt="Logo"
               style={{ width: "50px" }}
-              className="cursor-pointer"
             />
           </div>
 
           {/* Hamburger */}
           <div
             onClick={handleDrawer}
-            className="md:hidden  z-20 flex items-center text-gray-300"
+            className="md:hidden z-20 flex items-center  text-gray-300"
           >
             {<Hamburger size={19} toggled={open} />}
           </div>
@@ -246,7 +244,7 @@ const App = () => {
                   path="/petList"
                   element={
                     <Protectedroute>
-                      <Dogs />
+                      <PetList />
                     </Protectedroute>
                   }
                 />

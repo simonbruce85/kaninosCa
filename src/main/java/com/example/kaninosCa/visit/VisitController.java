@@ -1,6 +1,6 @@
 package com.example.kaninosCa.visit;
 
-import com.example.kaninosCa.owner.Owner;
+
 import com.example.kaninosCa.pet.Pet;
 import com.example.kaninosCa.pet.PetService;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,5 @@
 package com.example.kaninosCa.doctor;
 
-import com.example.kaninosCa.pet.Pet;
-import com.example.kaninosCa.pet.PetService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

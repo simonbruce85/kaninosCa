@@ -5,21 +5,16 @@ import com.example.kaninosCa.document.Document;
 import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.vaccine.Vaccine;
 import com.example.kaninosCa.visit.Visit;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sun.istack.NotNull;
 import com.vladmihalcea.hibernate.type.array.ListArrayType;
-import com.vladmihalcea.hibernate.type.array.StringArrayType;
 import lombok.*;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
-import org.hibernate.mapping.Array;
 
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @ToString

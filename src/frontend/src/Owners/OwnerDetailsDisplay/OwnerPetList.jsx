@@ -1,29 +1,14 @@
-import React, { useEffect, useState } from "react";
-import { getOwnerPetList } from "../../client";
-import PetDetails from "../../Dogs/DogDetailsDisplay/PetDetails";
+import React from "react";
+import PetDetails from "../../Pets/DogDetailsDisplay/PetDisplayDetails";
 
-const OwnerPetList = ({owner}) => {
-  const [petList, setPetList] = useState([]);
+const OwnerPetList = ({ owner }) => {
 
-  // const fetchOwner = (ownerId) =>
-  //   getOwnerPetList(ownerId)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setPetList(data);
-  //     });
-
-  // useEffect(() => {
-  //   fetchOwner(owner.owner.id);
-  // }, []);
-
-
-  return(
-  <div className="flex-col w-full">
-    
-    {owner.pets?.map((pet) => {
-      return <PetDetails pet={pet}/>
-    })}
-  </div>)
+  return (
+    <div className="flex-col w-full">
+      {owner.pets?.map((pet) => {
+        return <PetDetails pet={pet} />
+      })}
+    </div>)
 };
 
 export default OwnerPetList;

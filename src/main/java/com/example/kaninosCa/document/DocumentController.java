@@ -1,6 +1,4 @@
 package com.example.kaninosCa.document;
-
-import com.example.kaninosCa.owner.Owner;
 import com.example.kaninosCa.visit.VisitService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;

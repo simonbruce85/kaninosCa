@@ -1,7 +1,5 @@
 package com.example.kaninosCa.vaccine;
 
-import com.example.kaninosCa.owner.Owner;
-import com.example.kaninosCa.owner.OwnerService;
 import com.example.kaninosCa.pet.Pet;
 import com.example.kaninosCa.pet.PetService;
 import com.example.kaninosCa.visit.Visit;

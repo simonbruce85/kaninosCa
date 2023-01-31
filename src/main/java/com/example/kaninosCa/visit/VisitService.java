@@ -1,7 +1,6 @@
 package com.example.kaninosCa.visit;
 
-import com.example.kaninosCa.owner.Owner;
-import com.example.kaninosCa.pet.PetRepository;
+
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,7 +17,6 @@ public class VisitService {
 
     @PostMapping
     public void addVisit(Visit visit) {
-        //check if email is taken
         //throw an error
         visitRepository.save(visit);
     }
