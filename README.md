@@ -17,7 +17,11 @@ User Management: Manage user accounts, including assigning roles and permissions
 
 # User Personas
 Veterinarian: A licensed veterinarian who is responsible for the medical treatment of patients and needs to access patient information quickly and efficiently.
+
 Clinic Manager: A person responsible for the overall management of the clinic, including financial and administrative tasks, who needs to be able to view patient records and track billing information.
+
 Veterinary Technician: A licensed or registered veterinary technician who provides support to the veterinarian, including taking medical histories, collecting samples, and administering medications.
+
 Receptionist: A person responsible for scheduling appointments, answering phone calls, and greeting clients who needs to be able to access patient information to schedule appointments and provide basic information about the patient's history.
+
 Client: A person who is the owner of a pet and needs to be able to access information about their pet's health, view appointment schedules, and receive reminders about appointments and preventive care.
