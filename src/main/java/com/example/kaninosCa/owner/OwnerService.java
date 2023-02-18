@@ -33,6 +33,8 @@ public class OwnerService {
         return ownerRepository.count();
     }
 
+    public Owner getOwnerByEmail(String email){ return ownerRepository.getOwnerByEmail(email);}
+
     public  void deleteOwner(Long ownerId){
 
         if (!ownerRepository.existsById(ownerId)) {

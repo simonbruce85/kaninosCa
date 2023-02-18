@@ -17,6 +17,7 @@ import java.util.List;
 @Getter
 @Table
 @NoArgsConstructor
+@AllArgsConstructor
 public class Owner {
     @Id
     @SequenceGenerator(
@@ -41,6 +42,8 @@ public class Owner {
     @NotNull
     @Column(nullable = false)
     private String phone;
+
+    private String email;
     @Column(columnDefinition="TEXT")
     private String notes;
 
@@ -52,15 +55,6 @@ public class Owner {
     )
     private List<Pet> pets = new ArrayList<>();
 
-
-    public Owner(Long id, String name, String address, String phone, String notes, List<Pet> pets) {
-        this.id = id;
-        this.name = name;
-        this.address = address;
-        this.phone = phone;
-        this.notes = notes;
-        this.pets = pets;
-    }
 
     public void addPet(Pet pet) {
         if (!this.pets.contains(pet)) {

@@ -22,6 +22,11 @@ public class OwnerController {
     @GetMapping(path="{id}")
     public Owner getOneOwner(@PathVariable("id") Long id){return ownerService.getOwnerById(id);}
 
+    @GetMapping(path = "ownerView/{email}")
+    public Owner getOwnerByEmail(@PathVariable("email") String email){
+        return ownerService.getOwnerByEmail(email);
+    }
+
     @GetMapping(path="/ownersDropdown")
     public List<Object> findOwnerIdAndName() {return ownerService.getAllOwnersIdAndName();}
 

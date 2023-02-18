@@ -14,4 +14,6 @@ public interface OwnerRepository extends JpaRepository<Owner,Long> {
 
     @Query("" + "SELECT CASE WHEN COUNT(s) > 0 THEN " + "TRUE ELSE FALSE END " + "FROM Owner s " + "WHERE s.phone = ?1 ")
     Boolean selectExistsPhone(String phone);
+
+    Owner getOwnerByEmail(String email);
 }
