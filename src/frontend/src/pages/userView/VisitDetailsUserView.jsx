@@ -4,11 +4,9 @@ import { getEntry } from "../../../client";
 import AddNewVisitForm from "./AddNewVisitForm";
 import VisitCard from "./VisitCard";
 
-const PetDisplayVisitDetails = (pet) => {
+const VisitDetailsUserView = (pet) => {
   const [showDrawer, setShowDrawer] = useState(false);
   const [petVisit, setPetVisit] = useState("")
-
-  let count =0;
 
   const fetchPetVisits = () => {
     getEntry("pets", pet.pet.id)
@@ -48,7 +46,7 @@ const PetDisplayVisitDetails = (pet) => {
         />
         <div>
           {petVisit.visits?.map((visit) => (
-            <VisitCard key={visit.visitId} visit={visit} count={count=count+1} />))}
+            <VisitCard key={visit.visitId} visit={visit} />))}
         </div>
 
       </div>
@@ -56,4 +54,4 @@ const PetDisplayVisitDetails = (pet) => {
   );
 };
 
-export default PetDisplayVisitDetails;
+export default VisitDetailsUserView;

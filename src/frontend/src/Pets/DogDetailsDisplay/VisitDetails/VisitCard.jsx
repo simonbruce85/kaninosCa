@@ -5,7 +5,7 @@ import { errorNotification, successNotification } from '../../../Notification'
 import { UploadOutlined } from '@ant-design/icons';
 import { isMobile } from 'react-device-detect';
 
-const VisitCard = ({visit}) => {
+const VisitCard = ({visit, count}) => {
   const {
     doctor,
 atHomeTreatment,
@@ -93,7 +93,9 @@ const handleClick = (id, key) =>{
  
 
   return (
-    <Descriptions bordered className='w-full my-4' column={1}>
+    <>
+    <div className='p-2 text-xl border-2 border-gray-300 w-fit rounded-lg my-2'>Visit {count} </div>
+    <Descriptions bordered className='w-full' column={1}>
     <Descriptions.Item label="Doctor" labelStyle={{width:"100px"}}>{doctor}</Descriptions.Item>
     <Descriptions.Item label="Date" >{date?.slice(8,10)}/{date?.slice(5,7)}/{date?.slice(0,4)} {"(DD/MM/AAAA)"}</Descriptions.Item>
     <Descriptions.Item label="Reason for the Visit" >{visitReason}</Descriptions.Item>
@@ -163,7 +165,7 @@ const handleClick = (id, key) =>{
             <div>
               <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>
                 {/*Slicing the string to fit in mobile devices when is longer than 20 characteres */}
-                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>20?document.name.slice(0,20):document.name}</Tag>
+                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>15?document.name.slice(0,15):document.name}</Tag>
                 </button>
             </div>
             )
@@ -174,6 +176,7 @@ const handleClick = (id, key) =>{
           </Upload>
       </Descriptions.Item>
   </Descriptions>
+  </>
   )
 }
 

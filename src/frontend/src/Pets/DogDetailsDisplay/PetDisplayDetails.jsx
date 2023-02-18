@@ -170,7 +170,7 @@ const PetDisplayDetails = ({ pet }) => {
             // <a key={document.id} rel="noopener noreferrer" href={`api/v1/documents/pets/${pet.id}/download/${document.documentLink}`} target="_blank">{document.name}</a>
             <div>
               <button key={document.id} onClick={()=>handleClick(pet.id, document.documentLink)}>
-                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>20?document.name.slice(0,20):document.name}</Tag>
+                <Tag color="blue" className="my-1 flex justify-center">{document.name.length>20?document.name.slice(0,15):document.name}</Tag>
                 </button>
             </div>
             )

@@ -45,14 +45,14 @@ const columnsMobile = (fetchDogs, navigate) => [
     key: "actions",
     render: (text, pet) => (
       <Radio.Group className="flex">
-        <Popconfirm
+        {/* <Popconfirm
           title={`Are you sure to delete ${pet.name}`}
           onConfirm={() => removeDog(pet.id, fetchDogs, pet.name)}
           okText="Yes"
           cancelText="No"
         >
           <Radio.Button value="small">Delete</Radio.Button>
-        </Popconfirm>
+        </Popconfirm> */}
         <Radio.Button
           value="small"
           onClick={() =>

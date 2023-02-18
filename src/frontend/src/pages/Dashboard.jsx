@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaHandHoldingMedical, FaDog, FaCat, FaEarlybirds, FaUsers, FaHorseHead } from 'react-icons/fa';
 import { getDogCount } from "../client";
+import { UserAuth } from '../auth/AuthContext'
 
 const Dashboard = () => {
 
@@ -10,7 +11,6 @@ const Dashboard = () => {
         getDogCount()
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 setDogCount(data);
             })
 

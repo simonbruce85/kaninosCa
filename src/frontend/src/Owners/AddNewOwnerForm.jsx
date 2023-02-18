@@ -102,6 +102,14 @@ function AddNewOwnerForm({ showDrawer, setShowDrawer, fetchOwners }) {
               >
                 <Input placeholder="Please enter owners address" />
               </Form.Item>
+                  <Form.Item
+                    name="email"
+                    label="Email"
+                    className="w-full"
+                    rules={[{ required: true, message: "Please enter owners email" }]}
+                  >
+                    <Input placeholder="Please enter owners email" />
+                  </Form.Item>
               <Form.Item
                 name="phone"
                 label="Phone"
@@ -147,6 +155,17 @@ function AddNewOwnerForm({ showDrawer, setShowDrawer, fetchOwners }) {
                     rules={[{ required: true, message: "Please enter Address name" }]}
                   >
                     <Input placeholder="Please enter owners address" />
+                  </Form.Item>
+                </Col>
+              </Row>
+              <Row gutter={16}>
+                <Col span={12}>
+                  <Form.Item
+                    name="email"
+                    label="Email"
+                    rules={[{ required: true, message: "Please enter owners email" }]}
+                  >
+                    <Input placeholder="Please enter owners email" />
                   </Form.Item>
                 </Col>
               </Row>

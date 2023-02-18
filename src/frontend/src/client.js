@@ -55,7 +55,7 @@ export const deleteEntry = (entry, entryId) =>
   }).then(checkStatus)
 
   export const getEntry = (entry, entryId) =>
-  fetch(`api/v1/${entry}/${entryId}`).then(checkStatus);
+  fetch(`/api/v1/${entry}/${entryId}`).then(checkStatus);
 
   export const getDogCount = () =>
   fetch(`api/v1/dashboard`).then(checkStatus);
@@ -63,11 +63,14 @@ export const deleteEntry = (entry, entryId) =>
   export const getOwnersIdAndName = () =>
   fetch(`api/v1/owners/ownersDropdown`).then(checkStatus);
 
+  export const getOwnerByEmail = (email) =>
+  fetch(`api/v1/owners/ownerView/${email}`).then(checkStatus);
+
   export const getOwnerPetList = (id) =>
   fetch(`api/v1/pets/allPetsOfOwner/${id}`).then(checkStatus);
 
   export const getVaccines = () =>
-  fetch(`api/v1/vaccines`).then(checkStatus);
+  fetch(`/api/v1/vaccines`).then(checkStatus);
 
   export const getDocLinks = (id, key) =>
   fetch(`api/v1/documents/pet/${id}/download/${key}`).then(checkStatus);

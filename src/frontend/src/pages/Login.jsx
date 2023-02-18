@@ -21,7 +21,11 @@ const Login = () => {
     try {
       setPersistence(auth, browserSessionPersistence);
       await logIn(email, password);
-      navigate("/");
+      if (email === "simon@simon.com"){
+        navigate("/dashboard");
+      }else{
+        navigate("/userView");
+      }
     } catch (error) {
       console.log(error);
       setError(error.message);

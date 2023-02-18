@@ -6,10 +6,9 @@ import {
   UserOutlined,
   FileOutlined,
 } from "@ant-design/icons";
-import PetDisplayDetails from "./DogDetailsDisplay/PetDisplayDetails";
-import PetDisplayVisitDetails from "./DogDetailsDisplay/VisitDetails/PetDisplayVisitDetails";
-import PetDisplayOwnerDetails from "./DogDetailsDisplay/PetDisplayOwnerDetails";
-import { getEntry } from "../client";
+import PetDisplayDetails from "../../Pets/DogDetailsDisplay/PetDisplayDetails";
+import PetDisplayVisitDetails from "../../Pets/DogDetailsDisplay/VisitDetails/PetDisplayVisitDetails";
+import { getEntry } from "../../client";
 import { useSearchParams } from "react-router-dom";
 import {isMobile} from 'react-device-detect';
 import { UploadOutlined } from '@ant-design/icons';
@@ -21,12 +20,6 @@ const items = [
     label: "Pet Details",
     key: 0,
     icon: <FileOutlined />,
-  },
-  {
-    label: "Owner Details",
-    key: 1,
-    icon: <UserOutlined />,
-    
   },
   {
     label: "Visits",
@@ -42,19 +35,13 @@ const itemsMobile = [
     icon: <FileOutlined />,
   },
   {
-    label: "Owner",
-    key: 1,
-    icon: <UserOutlined />,
-    
-  },
-  {
     label: "Visits",
     key: 2,
     icon: <CarryOutOutlined />,
   },
 ];
 
-const PetInformation = (state) => {
+const PetInformation = () => {
 
   const [current, setCurrent] = useState("0");
   const [displayContent, setDisplayContent] = useState("0")
@@ -62,6 +49,7 @@ const PetInformation = (state) => {
   const [searchParams] = useSearchParams();
   const petId = searchParams.get("petId") //getting the value from the query param from URL.
   
+  console.log(petId, "l petId es")
 
   const fetchPet = (petId) =>{
         getEntry("pets", petId)
@@ -72,6 +60,7 @@ const PetInformation = (state) => {
             })}
 
     useEffect(() => {
+      console.log("fetching pet")
         fetchPet(petId);
     }, []);
 
@@ -98,8 +87,6 @@ const PetInformation = (state) => {
   const PageDisplay = () => {
     if (displayContent === "0") {
       return <PetDisplayDetails pet={pet}/>;
-    } else if (displayContent === "1") {
-      return <PetDisplayOwnerDetails pet={pet}/>
     } else {
       return <PetDisplayVisitDetails pet={pet} />;
     }
@@ -118,7 +105,7 @@ const PetInformation = (state) => {
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
           <div className="relative ">
-          {pet.petProfileImageLink?<img  className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px]" src={`api/v1/pets/${petId}/profilePicture/download`} alt="loginPic"/>
+          {pet.petProfileImageLink?<img  className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px]" src={`/api/v1/pets/${petId}/profilePicture/download`} alt="loginPic"/>
           :<Avatar size={isMobile?128:200}  icon={<UserOutlined />} />}
           <h1>{}</h1>
           <Upload {...props}>
