@@ -1,8 +1,9 @@
-import { Badge, Button, Descriptions } from "antd";
+import { Descriptions } from "antd";
 import React, { useEffect, useState } from "react";
 import { getEntry } from "../../../client";
 import AddNewVisitForm from "./AddNewVisitForm";
 import VisitCard from "./VisitCard";
+import { PlusOutlined } from "@ant-design/icons";
 
 const PetDisplayVisitDetails = (pet) => {
   const [showDrawer, setShowDrawer] = useState(false);
@@ -31,14 +32,14 @@ const PetDisplayVisitDetails = (pet) => {
           className="w-full"
           column={1}
         ></Descriptions>
-        <div className="flex items-center">
-          <Button
+       <div className="flex py-1 px-3 border items-center  mx-2 rounded-xl text-black hover:border-cyan-700 hover:text-cyan-700 w-fit">
+          <PlusOutlined className="mr-1 " />
+          <button
             onClick={() => setShowDrawer(!showDrawer)}
-            className="flex items-center justify-center rounded-lg ml-8"
+            className=""
           >
-            Add New Visit
-          </Button>
-          <Badge count={pet.length} className="site-badge-count-4" />
+            Add New Pet
+          </button>
         </div>
         <AddNewVisitForm
           showDrawer={showDrawer}

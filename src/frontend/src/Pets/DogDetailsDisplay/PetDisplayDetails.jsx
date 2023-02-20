@@ -150,7 +150,7 @@ const PetDisplayDetails = ({ pet }) => {
   return (
     <Descriptions title="" bordered className="w-full py-2" column={1}>
       <Descriptions.Item label="Name" labelStyle={{ width: "100px" }}>
-        {pet.name}
+        {pet.name?.charAt(0).toUpperCase() + pet.name?.slice(1)}{/*first letter to uppecarse*/}
       </Descriptions.Item>
       <Descriptions.Item label="DOB">{pet.dob?.slice(8, 10)}/{pet.dob?.slice(5, 7)}/{pet.dob?.slice(0, 4)} {"(DD/MM/AAAA)"}</Descriptions.Item>
       <Descriptions.Item label="Type">{pet.type}</Descriptions.Item>

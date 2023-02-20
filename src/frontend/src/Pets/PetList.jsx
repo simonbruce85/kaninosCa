@@ -1,4 +1,4 @@
-import { Popconfirm, Table, Radio, Badge, Button } from "antd";
+
 import React, { useEffect, useState } from "react";
 import { deleteEntry, getAllRows } from "../client";
 import { errorNotification, successNotification } from "../Notification";
@@ -79,16 +79,16 @@ const PetList = () => {
         fetchPets={fetchPets}
       />
       <div className="flex items-center">
-        <div className="flex py-1 px-2 border-2 items-center  mx-2 rounded-xl">
-        <PlusOutlined className="mx-1"/>
-        <button
-          onClick={() => setShowDrawer(!showDrawer)}
-          className=""
-        >
-          Add New Pet
-        </button>
+        <div className="flex py-1 px-3 border items-center  mx-2 rounded-xl text-black hover:border-cyan-700 hover:text-cyan-700">
+          <PlusOutlined className="mr-1 " />
+          <button
+            onClick={() => setShowDrawer(!showDrawer)}
+            className=""
+          >
+            Add New Pet
+          </button>
         </div>
-        <span className="border-2 rounded-full py-1 px-2" >{pets.length}</span>
+        <span className="border rounded-full py-1 px-2" >{pets.length}</span>
       </div>
       <div className="flex flex-wrap ">
         {pets?.map((pet) => {

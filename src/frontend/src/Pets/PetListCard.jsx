@@ -16,7 +16,7 @@ const PetListCard = ({ pet }) => {
       })
     }>
       {pet.petProfileImageLink ? <img className="rounded-lg w-full h-2/3 object-cover" src={`api/v1/pets/${pet.id}/profilePicture/download`} /> : <div className='bg-gray-400 h-2/3 w-full object-cover  rounded-lg'></div>}
-      <p><strong>{pet.name}</strong></p>
+      <p><strong>{pet.name.charAt(0).toUpperCase() + pet.name.slice(1)}</strong></p>{/* first letter to uppercase*/}
       <p className='hidden md:block'>{pet.breed}</p>
       <p className='text-cyan-700'>{pet.owner.name}</p>
       <p className='hidden md:block'>{pet.owner.phone}</p>
