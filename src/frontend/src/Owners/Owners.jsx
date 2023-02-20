@@ -103,6 +103,7 @@ const Owners = () => {
       .then((res) => res.json())
       .then((data) => {
         setOwners(data);
+        console.log(data)
       })
       .catch((err) => {
         console.log(err.response);

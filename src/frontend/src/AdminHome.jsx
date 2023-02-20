@@ -14,15 +14,20 @@ import Signup from "./pages/Signup";
 import Protectedroute from "./auth/Protectedroute";
 import { UserAuth } from "./auth/AuthContext";
 import { MdLogout } from "react-icons/md";
-import { AiOutlineCalendar, AiOutlineUser, AiOutlineDashboard } from "react-icons/ai";
+import {
+  AiOutlineCalendar,
+  AiOutlineUser,
+  AiOutlineDashboard,
+} from "react-icons/ai";
 
 const { Content, Footer, Sider } = Layout;
 
 const AdminHome = () => {
-
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
+  console.log(window.location.pathname)
+  const [selected, setSelected] = useState(window.location.pathname);
   const { user, logOut } = UserAuth();
 
   const handleLogout = async () => {
@@ -48,8 +53,14 @@ const AdminHome = () => {
       handleLogout();
     }, 200); //used to give the drawer some time to fully close (pending revision to find a better way to logout)
   };
+
+   const handleOnClick = (destination) => {
+    setSelected(`${destination}`)
+    console.log(selected)
+    navigate(`${destination}`)
+  };
   return (
-    <> 
+    <>
       <div
         className={`${!user ? "hidden" : "flex"} w-full min-h-screen `} //hide the bar when use is not logged in
       >
@@ -63,36 +74,42 @@ const AdminHome = () => {
           <div className="h-[90%] flex flex-col w-full mb-4 justify-between">
             <ul className="w-full flex flex-col text-gray-300  h-2/5 ">
               <li
-                className=" flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white"
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${
+                  selected === "/" ? "bg-cyan-700" : ""
+                }`}
                 onClick={() => {
-                  navigate("/dashboard");
+                  handleOnClick("/");
                 }}
               >
                 <AiOutlineDashboard className="lg:px-2 w-[32px] h-[24px]" />
                 <p className="hidden lg:block">Dashboard</p>
               </li>
               <li
-                className=" flex py-2 items-center justify-center lg:justify-start pl-2  hover:text-white"
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${
+                  selected === "/petList" ? "bg-cyan-700" : ""
+                }`}
                 onClick={() => {
-                  navigate("/petList");
+                  handleOnClick("/petList");
                 }}
               >
                 <FaDog className="lg:px-2 w-[32px] h-[24px]" />{" "}
                 <p className="hidden lg:block">Pets</p>
               </li>
               <li
-                className=" flex py-2 items-center justify-center lg:justify-start pl-2  hover:text-white"
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white cursor-default ${
+                  selected === "/ownerList" ? "bg-cyan-700" : ""
+                }`}
                 onClick={() => {
-                  navigate("/ownerList");
+                  handleOnClick("/ownerList");
                 }}
               >
                 <AiOutlineUser className="lg:px-2 w-[32px] h-[24px]" />{" "}
                 <p className="hidden lg:block">Owners</p>
               </li>
               <li
-                className="flex py-2 items-center justify-center lg:justify-start pl-2  hover:text-white"
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${selected === "/calendar" ? "bg-cyan-700" : ""}`}
                 onClick={() => {
-                  navigate("/calendar");
+                  handleOnClick("/calendar");
                 }}
               >
                 <AiOutlineCalendar className="lg:px-2 w-[32px] h-[24px]" />{" "}
@@ -100,13 +117,13 @@ const AdminHome = () => {
               </li>
             </ul>
             <ul>
-            <li
-                className="flex py-2 items-center justify-center text-gray-300 lg:justify-start pl-2  hover:text-black "
+              <li
+                className="flex py-2 items-center justify-center text-gray-300 lg:justify-start pl-2  hover:text-white  hover:bg-cyan-700"
                 onClick={() => {
                   handleLogout();
                 }}
               >
-                <MdLogout className="ml-1 lg:ml-0 lg:px-2 w-[32px] h-[24px]"/>{" "}
+                <MdLogout className="ml-1 lg:ml-0 lg:px-2 w-[32px] h-[24px]" />{" "}
                 <p className="hidden lg:block">Log Out</p>
               </li>
             </ul>
@@ -142,7 +159,7 @@ const AdminHome = () => {
               <li
                 className=" flex items-center text-lg py-2 "
                 onClick={() => {
-                  navigate("/dashboard");
+                  navigate("/");
                   handleDrawer();
                 }}
               >
@@ -164,7 +181,7 @@ const AdminHome = () => {
                   handleDrawer();
                 }}
               >
-                < AiOutlineUser className="px-2 w-[32px] " /> Owners
+                <AiOutlineUser className="px-2 w-[32px] " /> Owners
               </li>
               <li
                 className="flex py-2 items-center text-lg"
@@ -173,7 +190,7 @@ const AdminHome = () => {
                   handleDrawer();
                 }}
               >
-                <AiOutlineCalendar  className="px-2 w-[32px]" /> Calendar
+                <AiOutlineCalendar className="px-2 w-[32px]" /> Calendar
               </li>
               <li
                 className="flex py-2 items-center text-lg"
@@ -205,7 +222,7 @@ const AdminHome = () => {
               {}
               <Routes>
                 <Route
-                  path="/dashboard"
+                  path="/"
                   element={
                     <Protectedroute>
                       <Dashboard />
@@ -265,8 +282,8 @@ const AdminHome = () => {
           </Footer>
         </Layout>
       </div>
-      </>
-  )
-}
+    </>
+  );
+};
 
-export default AdminHome
+export default AdminHome;

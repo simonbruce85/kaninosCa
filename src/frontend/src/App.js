@@ -7,6 +7,7 @@ import { Route, Routes } from "react-router-dom";
 import RedirectRoute from "./auth/RedirectRoute";
 import Login from "./pages/Login";
 import Protectedroute from "./auth/Protectedroute";
+import Dashboard from "./pages/Dashboard";
 
 const App = () => {
   
@@ -24,7 +25,7 @@ const App = () => {
           }
         />
         <Route
-          path="/*"
+          path="/*"//* used to let router know that inside "/" path it will find more subroutes
           element={
             <Protectedroute>
               <AdminHome />

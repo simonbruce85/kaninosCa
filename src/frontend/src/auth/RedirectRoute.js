@@ -8,7 +8,7 @@ const RedirectRoute = ({children}) => {
     if(!user){
         return children;
     }else if (user.email==="simon@simon.com"){
-      return <Navigate to="/dashboard"/>
+      return <Navigate to="/"/>
     }else{
       return <Navigate to="/userView"/>
   }

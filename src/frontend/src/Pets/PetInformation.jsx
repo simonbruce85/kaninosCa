@@ -118,7 +118,7 @@ const PetInformation = (state) => {
       <div className=" h-1/5 bg-grey-300 pt-4">
         <div className="h-full flex flex-col justify-end items-center">
           <div className="relative ">
-          {pet.petProfileImageLink?<img  className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px]" src={`api/v1/pets/${petId}/profilePicture/download`} alt="loginPic"/>
+          {pet.petProfileImageLink?<img  className="rounded-full w-[128px] h-[128px] lg:w-[200px] lg:h-[200px] object-cover" src={`api/v1/pets/${petId}/profilePicture/download`} alt="loginPic"/>
           :<Avatar size={isMobile?128:200}  icon={<UserOutlined />} />}
           <h1>{}</h1>
           <Upload {...props}>

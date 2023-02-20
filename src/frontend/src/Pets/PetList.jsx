@@ -4,15 +4,15 @@ import { deleteEntry, getAllRows } from "../client";
 import { errorNotification, successNotification } from "../Notification";
 import { PlusOutlined } from "@ant-design/icons";
 import AddNewDogForm from "./AddNewDogForm";
-import { useNavigate } from "react-router-dom";
 import { isMobile } from "react-device-detect";
+import PetListCard from "./PetListCard";
 
 const removeDog = (id, callback, petName) => {
   deleteEntry("pets", id)
     .then(() => {
       successNotification("Dog deleted", `${petName} has been deleted`);
       callback();
-      
+
     })
     .catch((err) => {
       console.log("error removing")
@@ -27,97 +27,7 @@ const removeDog = (id, callback, petName) => {
     });
 };
 
-const columnsMobile = (fetchDogs, navigate) => [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    sorter: true,
-  },
-  {
-    title: "Owner",
-    dataIndex: "owner",
-    key: "owner",
-    render: (owner) => `${owner.name}`,
-  },
-  {
-    title: "Actions",
-    key: "actions",
-    render: (text, pet) => (
-      <Radio.Group className="flex">
-        {/* <Popconfirm
-          title={`Are you sure to delete ${pet.name}`}
-          onConfirm={() => removeDog(pet.id, fetchDogs, pet.name)}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Radio.Button value="small">Delete</Radio.Button>
-        </Popconfirm> */}
-        <Radio.Button
-          value="small"
-          onClick={() =>
-            navigate({
-              pathname: "/pet",
-              search: `?petId=${pet.id}`,
-            })
-          }
-        >
-          Details
-        </Radio.Button>
-      </Radio.Group>
-    ),
-  },
-];
-
-const columns = (fetchDogs, navigate) => [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name",
-    sorter: true,
-  },
-  {
-    title: "Owner",
-    dataIndex: "owner",
-    key: "owner",
-    render: (owner) => `${owner.name}`,
-  },
-  {
-    title: "Breed",
-    dataIndex: "breed",
-    key: "breed",
-  },
-  {
-    title: "Actions",
-    key: "actions",
-    render: (text, pet) => (
-      <Radio.Group>
-        <Popconfirm
-          title={`Are you sure to delete ${pet.name}`}
-          onConfirm={() => removeDog(pet.id, fetchDogs, pet.name)}
-          okText="Yes"
-          cancelText="No"
-        >
-          <Radio.Button value="small">Delete</Radio.Button>
-        </Popconfirm>
-        <Radio.Button
-          value="small"
-          onClick={() =>
-            navigate({
-              pathname: "/pet",
-              search: `?petId=${pet.id}`,
-            })
-          }
-        >
-          Details
-        </Radio.Button>
-      </Radio.Group>
-    ),
-  },
-];
-
 const PetList = () => {
-  const navigate = useNavigate();
   const [pets, setPets] = useState([]);
   const [showDrawer, setShowDrawer] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -161,49 +71,30 @@ const PetList = () => {
     fetchPets();
   }, []);
 
-  const handleTableChange = (pagination, filters, sorter) => {
-    setTableParams({
-      pagination,
-      filters,
-      ...sorter,
-    });
-  };
-
   return (
-    <div className="">
+    <div className=" py-2 md:p-4">
       <AddNewDogForm
         showDrawer={showDrawer}
         setShowDrawer={setShowDrawer}
         fetchPets={fetchPets}
       />
-      <Table
-        columns={
-          isMobile
-            ? columnsMobile(fetchPets, navigate)
-            : columns(fetchPets, navigate)
-        }
-        title={() => (
-          <div className="flex items-center">
-            <Button
-              onClick={() => setShowDrawer(!showDrawer)}
-              type="default"
-              shape="round"
-              icon={<PlusOutlined />}
-              size="small"
-              className="flex items-center justify-center"
-            >
-              Add New Pet
-            </Button>
-            <Badge count={pets.length} className="site-badge-count-4" />
-          </div>
-        )}
-        rowKey={(pets) => pets.id}
-        dataSource={pets}
-        pagination={tableParams.pagination}
-        loading={loading}
-        onChange={handleTableChange}
-        className="p-2"
-      />
+      <div className="flex items-center">
+        <div className="flex py-1 px-2 border-2 items-center  mx-2 rounded-xl">
+        <PlusOutlined className="mx-1"/>
+        <button
+          onClick={() => setShowDrawer(!showDrawer)}
+          className=""
+        >
+          Add New Pet
+        </button>
+        </div>
+        <span className="border-2 rounded-full py-1 px-2" >{pets.length}</span>
+      </div>
+      <div className="flex flex-wrap ">
+        {pets?.map((pet) => {
+          return <PetListCard key={pet.id} pet={pet} />
+        })}
+      </div>
     </div>
   );
 };
