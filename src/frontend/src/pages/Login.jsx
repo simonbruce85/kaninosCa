@@ -89,7 +89,7 @@ const Login = () => {
                     Username = simon@simon.com
                   </p>
                   <p>
-                    password = kaninos12345
+                    password = kaninos10
                   </p>
                 </div>
               </div>
