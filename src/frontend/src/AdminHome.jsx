@@ -54,7 +54,7 @@ const AdminHome = () => {
     }, 200); //used to give the drawer some time to fully close (pending revision to find a better way to logout)
   };
 
-   const handleOnClick = (destination) => {
+  const handleOnClick = (destination) => {
     setSelected(`${destination}`)
     console.log(selected)
     navigate(`${destination}`)
@@ -74,9 +74,8 @@ const AdminHome = () => {
           <div className="h-[90%] flex flex-col w-full mb-4 justify-between">
             <ul className="w-full flex flex-col text-gray-300  h-2/5 ">
               <li
-                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${
-                  selected === "/" ? "bg-cyan-700" : ""
-                }`}
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${selected === "/" ? "bg-cyan-700 text-white" : ""
+                  }`}
                 onClick={() => {
                   handleOnClick("/");
                 }}
@@ -85,9 +84,8 @@ const AdminHome = () => {
                 <p className="hidden lg:block">Dashboard</p>
               </li>
               <li
-                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${
-                  selected === "/petList" ? "bg-cyan-700" : ""
-                }`}
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${selected === "/petList" ? "bg-cyan-700 text-white" : ""
+                  }`}
                 onClick={() => {
                   handleOnClick("/petList");
                 }}
@@ -96,9 +94,8 @@ const AdminHome = () => {
                 <p className="hidden lg:block">Pets</p>
               </li>
               <li
-                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white cursor-default ${
-                  selected === "/ownerList" ? "bg-cyan-700" : ""
-                }`}
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white cursor-default ${selected === "/ownerList" ? "bg-cyan-700 text-white" : ""
+                  }`}
                 onClick={() => {
                   handleOnClick("/ownerList");
                 }}
@@ -107,7 +104,7 @@ const AdminHome = () => {
                 <p className="hidden lg:block">Owners</p>
               </li>
               <li
-                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${selected === "/calendar" ? "bg-cyan-700" : ""}`}
+                className={`flex justify-center lg:justify-start items-center py-2 pl-2  hover:text-white  cursor-default ${selected === "/calendar" ? "bg-cyan-700 text-white" : ""}`}
                 onClick={() => {
                   handleOnClick("/calendar");
                 }}
@@ -118,7 +115,7 @@ const AdminHome = () => {
             </ul>
             <ul>
               <li
-                className="flex py-2 items-center justify-center text-gray-300 lg:justify-start pl-2  hover:text-white  hover:bg-cyan-700"
+                className="flex py-2 items-center justify-center text-gray-300 lg:justify-start pl-2  hover:text-white  hover:bg-cyan-700 "
                 onClick={() => {
                   handleLogout();
                 }}
@@ -219,7 +216,7 @@ const AdminHome = () => {
               }}
             ></div>
             <div className="site-layout-background min-h-[360px] mt-[100px] md:mt-[0px]">
-              {}
+              { }
               <Routes>
                 <Route
                   path="/"
